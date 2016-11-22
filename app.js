@@ -138,6 +138,10 @@
     }
 
     $scope.teamShow = false;
+    $scope.hideTeam = function(){
+      $scope.teamShow = false;
+    }
+
     $scope.da_max_team = [], $scope.vo_max_team = [], $scope.pf_max_team = [], $scope.da_max_team_2 = [], $scope.vo_max_team_2 = [], $scope.pf_max_team_2 = [];
     $scope.buildTeam = function(){
       if($scope.cards.length < 15){
