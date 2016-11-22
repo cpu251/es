@@ -1,3 +1,5 @@
+  console.log('作者：KUMA\n这是一个用来计算偶像梦幻祭演唱会组队数值的网页，运用了Bootstrap3, Jquery3, AngularJs来做的~~KUMA');
+  
   var app = angular.module('esApp', []);
   app.controller('esCtrl', function($scope) {
     $('body').css('display', '');
