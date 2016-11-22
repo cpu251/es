@@ -123,34 +123,6 @@
         font-size: 9px;
       }
     }
-    .ub {
-      display: -webkit-box;
-      display: box;
-    }
-    .ubf1 {
-      -webkit-box-flex: 1;
-      box-flex: 1;
-    }
-    .uov {
-      -webkit-box-orient: vertical;
-      box-orient: vertical;
-    }
-    .uac {
-      -webkit-box-align: center;
-      box-align: center;
-    }
-    .uae {
-      -webkit-box-align: end;
-      box-align: end;
-    }
-    .upc {
-      -webkit-box-pack: center;
-      box-pack: center;
-    }
-    .upe {
-      -webkit-box-pack: end;
-      box-pack: end;
-    }
   </style>
 </head>
 <body ng-app="esApp" ng-controller="esCtrl" style="display:none;">
@@ -160,18 +132,18 @@
   <p class="btns-md">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片配置</button>
     <button type="button" class="btn btn-primary" ng-click="configCharacter()">配置角色</button>
-    <button type="button" class="btn btn-primary" ng-click="configTeam()">配置组队</button>
-    <button type="button" class="btn btn-danger pull-right" ng-click="buildTeam()">生成队伍</button>
-    <button type="button" class="btn btn-info pull-right" ng-click="hideTeam()" style="margin-right:4px;" ng-if="teamShow == true">隐藏队伍</button>
+    <button type="button" class="btn btn-primary" ng-click="configTeam()">配置技能</button>
+    <button type="button" class="btn btn-danger pull-right" ng-click="buildTeam()">生成组队</button>
+    <button type="button" class="btn btn-info pull-right" ng-click="hideTeam()" style="margin-right:4px;" ng-if="teamShow == true">隐藏组队</button>
   </p>
   <p class="btns-sm">
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片配置</button>
-    <button type="button" class="btn btn-info btn-sm pull-right" ng-click="hideTeam()" ng-if="teamShow == true">隐藏队伍</button>
+    <button type="button" class="btn btn-info btn-sm pull-right" ng-click="hideTeam()" ng-if="teamShow == true">隐藏组队</button>
   </p>
   <p class="btns-sm">
     <button type="button" class="btn btn-primary btn-sm" ng-click="configCharacter()">配置角色</button>
-    <button type="button" class="btn btn-primary btn-sm" ng-click="configTeam()">配置组队</button>
-    <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="buildTeam()">生成队伍</button>
+    <button type="button" class="btn btn-primary btn-sm" ng-click="configTeam()">配置技能</button>
+    <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="buildTeam()">生成组队</button>
   </p>
   <div class="modal fade" id="cardsModal" tabindex="1" role="dialog" aria-labelledby="cardsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
