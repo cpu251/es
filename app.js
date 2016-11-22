@@ -559,28 +559,29 @@
         if(team_value != 'no_team'){
           for(m in team[team_value].member){
             var character = team[team_value].member[m];
-            for(var i = 0, j = 0, max = 1, flag = false; j < max && i < card.length; flag && ((temp_team.key[num] = i, num++) || true) && j++, i++){
+            for(var i = 0, j = 0, max = 1, flag = false; j < max && i < card.length; flag && ((temp_team.key[num + Number(m)] = i) || true) && j++, i++){
               if($.inArray(i, temp_team.key) == -1 && $.inArray(card[i].character, temp_team.team[team_key].member) == -1 && card[i].character == character){
                 flag = true;
                 temp_team.team[team_key].member.push(card[i].character);
-                temp_team.card[num] = card[i];
+                temp_team.card[num + Number(m)] = card[i];
               }else{
                 flag = false;
               }
             }
           }
         }
+        num += 5;
       });
 
       num = 0;
       $.each([t1, t2, t3], function(team_key, team_value){
         num = num%5 == 0 ? num : num + 5 - num%5;
         if(team_value == 'no_team'){
-          for(var i = 0, j = 0, max = 5, flag = false; j < max && i < card.length; flag && ((temp_team.key[num] = i, num++) || true) && j++, i++){
+          for(var i = 0, j = 0, max = 5, flag = false; j < max && i < card.length; flag && ((temp_team.key[num + j] = i) || true) && j++, i++){
             if($.inArray(i, temp_team.key) == -1 && $.inArray(card[i].character, temp_team.team[team_key].member) == -1){
               flag = true;
               temp_team.team[team_key].member.push(card[i].character);
-              temp_team.card[num] = card[i];
+              temp_team.card[num + j] = card[i];
             }else{
               flag = false;
             }
@@ -598,41 +599,30 @@
               temp_team.key[num + i] = null;
             }
             temp_team.team[team_key].member = [];
-            num += 5;
-          }else if(member_length < 5){
-            num += member_length;
-            for(var i = 0, j = 0, max = 5 - member_length, flag = false; j < max && i < card.length; flag && ((temp_team.key[num] = i, num++) || true) && j++, i++){
+            temp_team.team[team_key].name = 'no_team';
+            for(var i = 0, j = 0, max = 5, flag = false; j < max && i < card.length; flag && ((temp_team.key[num + j] = i) || true) && j++, i++){
               if($.inArray(i, temp_team.key) == -1 && $.inArray(card[i].character, temp_team.team[team_key].member) == -1){
                 flag = true;
                 temp_team.team[team_key].member.push(card[i].character);
-                temp_team.card[num] = card[i];
+                temp_team.card[num + j] = card[i];
               }else{
                 flag = false;
               }
             }
-          }else{
-            num += 5;
-          }
-        }
-      });
-
-      num = 0;
-      $.each([t1, t2, t3], function(team_key, team_value){
-        num = num%5 == 0 ? num : num + 5 - num%5;
-        if(temp_team.card[num] == null){
-          temp_team.team[team_key].name = 'no_team';
-          for(var i = 0, j = 0, max = 5, flag = false; j < max && i < card.length; flag && ((temp_team.key[num] = i, num++) || true) && j++, i++){
-            if($.inArray(i, temp_team.key) == -1 && $.inArray(card[i].character, temp_team.team[team_key].member) == -1){
-              flag = true;
-              temp_team.team[team_key].member.push(card[i].character);
-              temp_team.card[num] = card[i];
-            }else{
-              flag = false;
+          }else if(member_length < 5){
+            var start = num + member_length;
+            for(var i = 0, j = 0, max = 5 - member_length, flag = false; j < max && i < card.length; flag && ((temp_team.key[start + j] = i) || true) && j++, i++){
+              if($.inArray(i, temp_team.key) == -1 && $.inArray(card[i].character, temp_team.team[team_key].member) == -1){
+                flag = true;
+                temp_team.team[team_key].member.push(card[i].character);
+                temp_team.card[start + j] = card[i];
+              }else{
+                flag = false;
+              }
             }
           }
-        }else{
-          num += 5;
         }
+        num += 5;
       });
 
       num = 0;
