@@ -95,7 +95,7 @@
       $('#removeCardsModal').modal('hide');
     }
     $scope.levelChange = function(index){
-      if(!$.inArray($scope.cards[index].level, $scope.level[$scope.cards[index].star])){
+      if($.inArray($scope.cards[index].level, $scope.level[$scope.cards[index].star]) == -1){
         $scope.cards[index].level = $scope.level[$scope.cards[index].star][0];
       }
     }
