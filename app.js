@@ -76,6 +76,7 @@
     }
     $scope.loadCardsJson = function(){
       $scope.cards = angular.fromJson($scope.cardsJson);
+      $scope.teamShow = false;
       $('#cardsModal').modal('hide');
     }
     $scope.removeCardsJson = function(){
