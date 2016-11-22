@@ -90,6 +90,7 @@
         times: false,
       }];
       $scope.cardsJson = angular.toJson($scope.cards);
+      $scope.teamShow = false;
       $('#cardsModal').modal('hide');
       $('#removeCardsModal').modal('hide');
     }
@@ -127,9 +128,23 @@
       $scope.cards[index+1] = tempcard;
     }
 
+    $scope.configCharacter = function(){
+      $scope.errorText = '尚未开启';
+      $('#errorModal').modal('show');
+    }
+    $scope.configTeam = function(){
+      $scope.errorText = '尚未开启';
+      $('#errorModal').modal('show');
+    }
+
     $scope.teamShow = false;
     $scope.da_max_team = [], $scope.vo_max_team = [], $scope.pf_max_team = [], $scope.da_max_team_2 = [], $scope.vo_max_team_2 = [], $scope.pf_max_team_2 = [];
     $scope.buildTeam = function(){
+      if($scope.cards.length < 15){
+        $scope.errorText = '请至少添加15张卡片';
+        $('#errorModal').modal('show');
+        return false;
+      }
       for(var c in $scope.cards){
         if($scope.cards[c].da == ''){
           $scope.cards[c].da = 0;

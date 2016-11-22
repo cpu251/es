@@ -159,16 +159,16 @@
   <h3 class="title-sm text-center">偶像梦幻祭演唱会组队</h3>
   <p class="btns-md">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片配置</button>
-    <button type="button" class="btn btn-primary" onclick="alert('尚未开启')">配置角色</button>
-    <button type="button" class="btn btn-primary" onclick="alert('尚未开启')">配置组队</button>
+    <button type="button" class="btn btn-primary" ng-click="configCharacter()">配置角色</button>
+    <button type="button" class="btn btn-primary" ng-click="configTeam()">配置组队</button>
     <button type="button" class="btn btn-danger pull-right" ng-click="buildTeam()">生成队伍</button>
   </p>
   <p class="btns-sm">
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片配置</button>
   </p>
   <p class="btns-sm">
-    <button type="button" class="btn btn-primary btn-sm" onclick="alert('尚未开启')">配置角色</button>
-    <button type="button" class="btn btn-primary btn-sm" onclick="alert('尚未开启')">配置组队</button>
+    <button type="button" class="btn btn-primary btn-sm" ng-click="configCharacter()">配置角色</button>
+    <button type="button" class="btn btn-primary btn-sm" ng-click="configTeam()">配置组队</button>
     <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="buildTeam()">生成队伍</button>
   </p>
   <div class="modal fade" id="cardsModal" tabindex="1" role="dialog" aria-labelledby="cardsModalLabel" aria-hidden="true">
@@ -200,6 +200,15 @@
           <button type="button" class="btn btn-danger" ng-click="removeCardsJson()">确定清空卡片</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="errorModal" tabindex="100" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true" style="top:160px;">
+    <div class="modal-dialog modal-md">
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4>提示</h4>
+        <p>{{errorText}}</p>
       </div>
     </div>
   </div>
