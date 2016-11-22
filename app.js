@@ -132,11 +132,11 @@
     }
 
     $scope.configCharacter = function(){
-      $scope.errorText = '尚未开启';
+      $scope.errorText = '尚未开启KUMA';
       $('#errorModal').modal('show');
     }
     $scope.configTeam = function(){
-      $scope.errorText = '尚未开启';
+      $scope.errorText = '尚未开启KUMA';
       $('#errorModal').modal('show');
     }
 
@@ -148,7 +148,7 @@
     $scope.da_max_team = [], $scope.vo_max_team = [], $scope.pf_max_team = [], $scope.da_max_team_2 = [], $scope.vo_max_team_2 = [], $scope.pf_max_team_2 = [];
     $scope.buildTeam = function(){
       if($scope.cards.length < 15){
-        $scope.errorText = '请至少添加15张卡片';
+        $scope.errorText = '请至少添加15张卡片KUMA';
         $('#errorModal').modal('show');
         return false;
       }
