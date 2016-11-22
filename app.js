@@ -385,7 +385,7 @@
                   }
                 }
               }
-              if(temp_max_2da < max_2da){
+              if(temp_max_2da < max_2da || (temp_max_2da == max_2da && temp_team.da < all_team[t1][t2][t3].da)){
                 temp_team = all_team[t1][t2][t3];
               }
             }else if(ability == 'vo_2'){
@@ -406,7 +406,7 @@
                   }
                 }
               }
-              if(temp_max_2vo < max_2vo){
+              if(temp_max_2vo < max_2vo || (temp_max_2vo == max_2vo && temp_team.vo < all_team[t1][t2][t3].vo)){
                 temp_team = all_team[t1][t2][t3];
               }
             }else if(ability == 'pf_2'){
@@ -427,7 +427,7 @@
                   }
                 }
               }
-              if(temp_max_2pf < max_2pf){
+              if(temp_max_2pf < max_2pf || (temp_max_2pf == max_2pf && temp_team.pf < all_team[t1][t2][t3].pf)){
                 temp_team = all_team[t1][t2][t3];
               }
             }
