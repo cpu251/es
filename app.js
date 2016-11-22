@@ -232,9 +232,9 @@
           $scope.pf_team.push($scope.teams[i]);
         }
       }
-      $scope.da_team = da_team.concat(team_concat($scope.da_team));
-      $scope.vo_team = vo_team.concat(team_concat($scope.vo_team));
-      $scope.pf_team = pf_team.concat(team_concat($scope.pf_team));
+      $scope.da_team = $scope.da_team.concat(team_concat($scope.da_team));
+      $scope.vo_team = $scope.vo_team.concat(team_concat($scope.vo_team));
+      $scope.pf_team = $scope.pf_team.concat(team_concat($scope.pf_team));
       function team_concat(team) {
         var temp_team = [];
         for (t1 in team) {
