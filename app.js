@@ -232,6 +232,41 @@
           $scope.pf_team.push($scope.teams[i]);
         }
       }
+      $scope.da_team = da_team.concat(team_concat($scope.da_team));
+      $scope.vo_team = vo_team.concat(team_concat($scope.vo_team));
+      $scope.pf_team = pf_team.concat(team_concat($scope.pf_team));
+      function team_concat(team) {
+        var temp_team = [];
+        for (t1 in team) {
+          for (t2 in team) {
+            if (t1 < t2) {
+              var flag = false;
+              for (var m = 0; !flag && m < team[t1].member.length; m++) {
+                if ($.inArray(team[t1].member[m], team[t2].member) > -1) {
+                  flag = true;
+                }
+              }
+              if (flag) {
+                var temp_team_concat = [];
+                temp_team_concat = temp_team_concat.concat(team[t1].member, team[t2].member);
+                temp_team_concat = $.uniqueSort(temp_team_concat);
+                if (temp_team_concat.length <= 5) {
+                  var character = temp_team_concat[m - 1];
+                  temp_team_concat.unshift(character);
+                  temp_team_concat = $.uniqueSort(temp_team_concat);
+                  temp_team.push({
+                    name: team[t1].name + ' + ' + team[t2].name,
+                    ability: team[t1].ability,
+                    value: Number((team[t1].value + team[t2].value).toFixed(2)),
+                    member: temp_team_concat,
+                  });
+                }
+              }
+            }
+          }
+        }
+        return temp_team;
+      }
     }
 
     $scope.max_team = function(team, card, ability) {
