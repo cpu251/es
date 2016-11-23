@@ -273,6 +273,8 @@
       $scope.vo_max_team_2 = $scope.max_team($scope.vo_team, $scope.vo_card, 'vo_2');
       $scope.pf_max_team_2 = $scope.max_team($scope.pf_team, $scope.pf_card, 'pf_2');
       $scope.teamShow = true;
+      $scope.configCharacterShow = false;
+      $scope.configTeamShow = false;
     }
 
     $scope.cardColor = function(card){
