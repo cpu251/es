@@ -138,7 +138,7 @@
   <p class="btns-md">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片数据</button>
     <button type="button" class="btn btn-primary" ng-if="configCharacterShow == false" ng-click="configCharacter(true)">配置角色</button>
-    <button type="button" class="btn btn-info" ng-if="configCharacterShow == true" ng-click="configCharacter(false)">隐藏角色</button>
+    <button type="button" class="btn btn-info" ng-if="configCharacterShow == true" ng-click="configCharacter(false)">隐藏配置</button>
     <button type="button" class="btn btn-primary" ng-click="configTeam()">配置技能</button>
     <button type="button" class="btn btn-danger pull-right" ng-click="buildTeam()" ng-if="teamShow == false">生成组队</button>
     <button type="button" class="btn btn-info pull-right" ng-click="hideTeam()" ng-if="teamShow == true">隐藏组队</button>
@@ -150,7 +150,7 @@
   </p>
   <p class="btns-sm">
     <button type="button" class="btn btn-primary btn-sm" ng-if="configCharacterShow == false" ng-click="configCharacter(true)">配置角色</button>
-    <button type="button" class="btn btn-info btn-sm" ng-if="configCharacterShow == true" ng-click="configCharacter(false)">隐藏角色</button>
+    <button type="button" class="btn btn-info btn-sm" ng-if="configCharacterShow == true" ng-click="configCharacter(false)">隐藏配置</button>
     <button type="button" class="btn btn-primary btn-sm" ng-click="configTeam()">配置技能</button>
     <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="buildTeam()" ng-if="teamShow == false">生成组队</button>
     <button type="button" class="btn btn-info btn-sm pull-right" ng-click="hideTeam()" ng-if="teamShow == true">隐藏组队</button>
