@@ -237,7 +237,7 @@
         <tr ng-repeat="(i_1, c_1) in character" ng-if="i_1 % 4 == 0">
           <td class="middle" ng-repeat="(i_2, c_2) in character" ng-if="i_2 - i_1 >= 0 && i_2 - i_1 < 4">
             <span ng-if="characterEdit[i_2] != true">{{c_2}}</span>
-            <input type="text" class="form-control input-sm" name="character[{{i_2}}]" placeholder="请输入角色名" ng-model="c_2" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true">
+            <input type="text" class="form-control input-sm" name="character[{{i_2}}]" placeholder="请输入角色名字" ng-model="c_2" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true">
             <a href="javascript:;" class="nowrap" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true" ng-click="confirmCharacter(i_2)">[确定]</a>
             <a href="javascript:;" class="nowrap" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] != true" ng-click="editCharacter(i_2)">[修改]</a>
             <a href="javascript:;" class="nowrap" ng-if="i_2 >= originalCharacter.length" ng-click="delCharacter(i_2)">[删除]</a>

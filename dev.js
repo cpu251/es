@@ -26,7 +26,7 @@
       }
       window.localStorage.setItem('ver', ver);
       var tempCharacter = angular.copy($scope.character);
-      tempCharacter.splice(index, $scope.originalCharacter.length);
+      tempCharacter.splice(0, $scope.originalCharacter.length);
       $scope.characterJson = angular.toJson(tempCharacter);
       window.localStorage.setItem('character', $scope.characterJson);
     },true);
@@ -43,7 +43,7 @@
       }
       window.localStorage.setItem('ver', ver);
       var tempTeams = angular.copy($scope.teams);
-      tempTeams.splice(index, $scope.originalTeams.length);
+      tempTeams.splice(0, $scope.originalTeams.length);
       $scope.teamsJson = angular.toJson(tempTeams);
       window.localStorage.setItem('teams', $scope.teamsJson);
     },true);
@@ -122,6 +122,8 @@
     $scope.loadCardsJson = function(){
       $scope.cards = angular.fromJson($scope.cardsJson);
       $scope.teamShow = false;
+      $scope.configCharacterShow = false;
+      $scope.configTeamShow = false;
       $('#cardsModal').modal('hide');
     }
     $scope.removeCardsJson = function(){
@@ -137,6 +139,8 @@
       }];
       $scope.cardsJson = angular.toJson($scope.cards);
       $scope.teamShow = false;
+      $scope.configCharacterShow = false;
+      $scope.configTeamShow = false;
       $('#cardsModal').modal('hide');
       $('#removeCardsModal').modal('hide');
     }
@@ -195,6 +199,33 @@
     }
     $scope.delCharacter = function(index){
       $scope.character.splice(index, 1);
+    }
+    $scope.loadCharacter = function(){
+      var tempCharacter = angular.copy($scope.character);
+      tempCharacter.splice(0, $scope.originalCharacter.length);
+      $scope.characterJson = angular.toJson(tempCharacter);
+      window.localStorage.setItem('character', $scope.characterJson);
+    }
+    $scope.loadCharacterJson = function(){
+      var tempCharacter = angular.copy($scope.originalCharacter);
+      tempCharacter = tempCharacter.concat(angular.fromJson($scope.characterJson));
+      $scope.character = tempCharacter;
+      $scope.teamShow = false;
+      /*$scope.configCharacterShow = false;
+      $scope.configTeamShow = false;*/
+      $('#characterModal').modal('hide');
+    }
+    $scope.removeCharacterJson = function(){
+      $scope.character = angular.copy($scope.originalCharacter);
+      window.localStorage.removeItem('character');
+      if(window.localStorage.getItem('teams') == null){
+        window.localStorage.removeItem('ver');
+      }
+      $scope.teamShow = false;
+      /*$scope.configCharacterShow = false;
+      $scope.configTeamShow = false;*/
+      $('#characterModal').modal('hide');
+      $('#removeCharacterModal').modal('hide');
     }
 
     $scope.configTeamShow = false;
