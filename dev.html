@@ -74,7 +74,7 @@
       .star{
         min-width: 45px;
       }
-      .team{
+      .team, .config{
         font-size: 12px;
       }
       .team-name{
@@ -97,7 +97,7 @@
       .star{
         min-width: 45px;
       }
-      .team{
+      .team, .config{
         font-size: 11px;
       }
       .team-title{
@@ -114,7 +114,7 @@
       .star{
         min-width: 40px;
       }
-      .team{
+      .team, .config{
         font-size: 10px;
       }
     }
@@ -125,7 +125,7 @@
       .star{
         min-width: 35px;
       }
-      .team{
+      .team, .config{
         font-size: 9px;
       }
     }
@@ -137,7 +137,8 @@
   <h3 class="title-sm text-center">偶像梦幻祭演唱会组队</h3>
   <p class="btns-md">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片数据</button>
-    <button type="button" class="btn btn-primary" ng-click="configCharacter()">配置角色</button>
+    <button type="button" class="btn btn-primary" ng-if="configCharacterShow == false" ng-click="configCharacter(true)">配置角色</button>
+    <button type="button" class="btn btn-info" ng-if="configCharacterShow == true" ng-click="configCharacter(false)">隐藏角色</button>
     <button type="button" class="btn btn-primary" ng-click="configTeam()">配置技能</button>
     <button type="button" class="btn btn-danger pull-right" ng-click="buildTeam()" ng-if="teamShow == false">生成组队</button>
     <button type="button" class="btn btn-info pull-right" ng-click="hideTeam()" ng-if="teamShow == true">隐藏组队</button>
@@ -148,7 +149,8 @@
     <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#profileModal">说明</button>
   </p>
   <p class="btns-sm">
-    <button type="button" class="btn btn-primary btn-sm" ng-click="configCharacter()">配置角色</button>
+    <button type="button" class="btn btn-primary btn-sm" ng-if="configCharacterShow == false" ng-click="configCharacter(true)">配置角色</button>
+    <button type="button" class="btn btn-info btn-sm" ng-if="configCharacterShow == true" ng-click="configCharacter(false)">隐藏角色</button>
     <button type="button" class="btn btn-primary btn-sm" ng-click="configTeam()">配置技能</button>
     <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="buildTeam()" ng-if="teamShow == false">生成组队</button>
     <button type="button" class="btn btn-info btn-sm pull-right" ng-click="hideTeam()" ng-if="teamShow == true">隐藏组队</button>
@@ -215,6 +217,78 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4>提示</h4>
         <p>{{errorText}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="configCharacter" ng-if="configCharacterShow == true">
+    <p class="btns-md">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#characterModal" ng-click="loadCharacter()">读取/备份角色数据</button>
+    </p>
+    <p class="btns-sm">
+      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#characterModal" ng-click="loadCharacter()">读取/备份角色数据</button>
+    </p>
+    <div class="alert alert-warning alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      如果游戏新增了人物，可以在这里增加，再去增加组队技能，如果我有空增加了，会强制清除角色和组队技能的缓存KUMA
+    </div>
+    <table class="table table-bordered text-center config">
+      <tbody>
+        <tr ng-repeat="(i_1, c_1) in character" ng-if="i_1 % 4 == 0">
+          <td class="middle" ng-repeat="(i_2, c_2) in character" ng-if="i_2 - i_1 >= 0 && i_2 - i_1 < 4">
+            <span ng-if="characterEdit[i_2] != true">{{c_2}}</span>
+            <input type="text" class="form-control input-sm" name="character[{{i_2}}]" placeholder="请输入角色名" ng-model="c_2" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true">
+            <a href="javascript:;" class="nowrap" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true" ng-click="confirmCharacter(i_2)">[确定]</a>
+            <a href="javascript:;" class="nowrap" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] != true" ng-click="editCharacter(i_2)">[修改]</a>
+            <a href="javascript:;" class="nowrap" ng-if="i_2 >= originalCharacter.length" ng-click="delCharacter(i_2)">[删除]</a>
+          </td>
+          <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 != 0 && characterEdit[character.length - 1] != true">
+            <a href="javascript:;" class="nowrap" ng-click="addCharacter()">[新增]</a>
+          </td>
+          <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 4 && character.length % 4 > 0 && characterEdit[character.length - 1] == true"></td>
+          <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 3 && character.length % 4 > 0"></td>
+          <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 2 && character.length % 4 > 0"></td>
+        </tr>
+        <tr ng-if="character.length % 4 == 0 && characterEdit[character.length - 1] != true">
+          <td class="middle">
+            <a href="javascript:;" class="nowrap" ng-click="addCharacter()">[新增]</a>
+          </td>
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal fade" id="characterModal" tabindex="1" role="dialog" aria-labelledby="characterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="characterModalLabel">读取/备份角色数据</h4>
+        </div>
+        <div class="modal-body">
+          <textarea class="form-control" rows="12" ng-model="characterJson"></textarea>
+          <div class="text-info">可以复制里面的内容，放到QQ收藏等常用的网络记事本内~KUMA<br/>下次需要使用时，粘贴上，点击读取数据即可还原角色数据~KUMA</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="loadCharacterJson()">读取数据</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCharacterModal">重置角色数据</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="removeCharacterModal" tabindex="2" role="dialog" aria-labelledby="removeCharacterModalLabel" aria-hidden="true" style="top:160px;">
+    <div class="modal-dialog modal-md">
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4>确定要重置角色数据吗？</h4>
+        <p>这会将您新增的所有角色数据清空，还原到初始的状态哦KUMA</p>
+        <p>
+          <button type="button" class="btn btn-danger" ng-click="removeCharacterJson()">确定重置角色数据</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </p>
       </div>
     </div>
   </div>

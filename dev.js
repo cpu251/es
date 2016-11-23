@@ -1,10 +1,53 @@
   console.log('作者：KUMA\n这是一个用来计算偶像梦幻祭演唱会组队数值的网页，运用了Bootstrap3, Jquery3, AngularJs来做的~~KUMA');
-  
+
+  var ver = 1611231635;
   var app = angular.module('esApp', []);
   app.controller('esCtrl', function($scope) {
     $('body').css('display', '');
 
-    $scope.character = character;
+    $scope.parseInt = function(val){
+      return parseInt(val);
+    }
+
+    if(window.localStorage.getItem('ver') != null && window.localStorage.getItem('ver') < ver){
+      window.localStorage.removeItem('character');
+      window.localStorage.removeItem('teams');
+    }
+
+    $scope.originalCharacter = character;
+    $scope.character = angular.copy($scope.originalCharacter);
+    if(window.localStorage.getItem('character') != null){
+      $scope.character = $scope.character.concat(angular.fromJson(window.localStorage.getItem('character')));
+    }
+    $scope.characterEdit = [];
+    $scope.$watch("character", function(n, o){
+      if(n == o){
+        return;
+      }
+      window.localStorage.setItem('ver', ver);
+      var tempCharacter = angular.copy($scope.character);
+      tempCharacter.splice(index, $scope.originalCharacter.length);
+      $scope.characterJson = angular.toJson(tempCharacter);
+      window.localStorage.setItem('character', $scope.characterJson);
+    },true);
+
+    $scope.originalTeams = team;
+    $scope.teams = angular.copy($scope.originalTeams);
+    if(window.localStorage.getItem('teams') != null){
+      $scope.teams = $scope.teams.concat(angular.fromJson(window.localStorage.getItem('team')));
+    }
+    $scope.teamEdit = [];
+    $scope.$watch("teams", function(n, o){
+      if(n == o){
+        return;
+      }
+      window.localStorage.setItem('ver', ver);
+      var tempTeams = angular.copy($scope.teams);
+      tempTeams.splice(index, $scope.originalTeams.length);
+      $scope.teamsJson = angular.toJson(tempTeams);
+      window.localStorage.setItem('teams', $scope.teamsJson);
+    },true);
+
     $scope.star = [5, 4, 3];
     $scope.level = {
       5:[80,75,70,65,60],
@@ -71,7 +114,7 @@
       }
       $scope.cardsJson = angular.toJson($scope.cards);
       window.localStorage.setItem('cards', $scope.cardsJson);
-    },true)
+    },true);
     $scope.loadCards = function(){
       $scope.cardsJson = angular.toJson($scope.cards);
       window.localStorage.setItem('cards', $scope.cardsJson);
@@ -131,13 +174,36 @@
       $scope.cards[index + 1] = tempcard;
     }
 
-    $scope.configCharacter = function(){
-      $scope.errorText = '尚未开启KUMA';
-      $('#errorModal').modal('show');
+    $scope.configCharacterShow = false;
+    $scope.configCharacter = function(flag){
+      /*$scope.errorText = '尚未开启KUMA';
+      $('#errorModal').modal('show');*/
+      $scope.teamShow = false;
+      $scope.configTeamShow = false;
+      $scope.configCharacterShow = flag;
     }
+    $scope.addCharacter = function(){
+      $scope.characterEdit[$scope.character.length] = true;
+      $scope.character.push('');
+    }
+    $scope.editCharacter = function(index){
+      $scope.characterEdit[index] = true;
+    }
+    $scope.confirmCharacter = function(index){
+      $scope.character[index] = $('input[name="character[' + index + ']"').val();
+      $scope.characterEdit[index] = false;
+    }
+    $scope.delCharacter = function(index){
+      $scope.character.splice(index, 1);
+    }
+
+    $scope.configTeamShow = false;
     $scope.configTeam = function(){
-      $scope.errorText = '尚未开启KUMA';
-      $('#errorModal').modal('show');
+      /*$scope.errorText = '尚未开启KUMA';
+      $('#errorModal').modal('show');*/
+      $scope.teamShow = false;
+      $scope.configCharacterShow = false;
+      $scope.configTeamShow = true;
     }
 
     $scope.teamShow = false;
@@ -165,7 +231,6 @@
       }
       $scope.da_card = [], $scope.vo_card = [], $scope.pf_card = [];
       $scope.cards_sort();
-      $scope.teams = team;
       $scope.da_team = [], $scope.vo_team = [], $scope.pf_team = [];
       $scope.teams_sort();
 
@@ -349,14 +414,6 @@
           }
         }
       }
-
-      /*if(ability == 'da' && da_all_team == []){
-        da_all_team = da_all_team.concat(all_team);
-      }else if(ability == 'vo' && vo_all_team == []){
-        vo_all_team = vo_all_team.concat(all_team);
-      }else if(ability == 'pf' && pf_all_team == []){
-        pf_all_team = pf_all_team.concat(all_team);
-      }*/
 
       var num = 0;
       for (t1 in all_team) {
@@ -709,181 +766,211 @@
       name: '任务完成',
       ability: 'vo',
       value: 0.10,
-      member: ['衣更真绪', '莲巳敬人', '天祥院英智', '姬宫桃李']
+      member: ['衣更真绪', '莲巳敬人', '天祥院英智', '姬宫桃李'],
+      del: false,
     },
     //临时队伍end
     {
       name: 'Trickstar',
       ability: 'da',
       value: 0.13,
-      member: ['明星昴流', '冰鹰北斗', '游木真', '衣更真绪']
+      member: ['明星昴流', '冰鹰北斗', '游木真', '衣更真绪'],
+      del: false,
     },
     {
       name: 'Fine',
       ability: 'pf',
       value: 0.13,
-      member: ['天祥院英智', '日日树涉', '伏见弓弦', '姬宫桃李']
+      member: ['天祥院英智', '日日树涉', '伏见弓弦', '姬宫桃李'],
+      del: false,
     },
     {
       name: 'Undead',
       ability: 'da',
       value: 0.13,
-      member: ['朔间零', '大神晃牙', '羽风薰', '乙狩阿多尼斯']
+      member: ['朔间零', '大神晃牙', '羽风薰', '乙狩阿多尼斯'],
+      del: false,
     },
     {
       name: 'Knights',
       ability: 'pf',
       value: 0.18,
-      member: ['濑名泉', '朔间凛月', '鸣上岚', '朱樱司', '月永雷欧']
+      member: ['濑名泉', '朔间凛月', '鸣上岚', '朱樱司', '月永雷欧'],
+      del: false,
     },
     {
       name: '流星队',
       ability: 'vo',
       value: 0.18,
-      member: ['南云铁虎', '高峰翠', '仙石忍', '深海奏汰', '守泽千秋']
+      member: ['南云铁虎', '高峰翠', '仙石忍', '深海奏汰', '守泽千秋'],
+      del: false,
     },
     {
       name: 'Ra*bits',
       ability: 'vo',
       value: 0.13,
-      member: ['紫之创', '天满光', '真白友也', '仁兔成鸣']
+      member: ['紫之创', '天满光', '真白友也', '仁兔成鸣'],
+      del: false,
     },
     {
       name: '红月',
       ability: 'da',
       value: 0.10,
-      member: ['神崎飒马', '鬼龙红郎', '莲巳敬人']
+      member: ['神崎飒马', '鬼龙红郎', '莲巳敬人'],
+      del: false,
     },
     {
       name: '2Wink',
       ability: 'vo',
       value: 0.05,
-      member: ['葵日向', '葵裕太']
+      member: ['葵日向', '葵裕太'],
+      del: false,
     },
     {
       name: '篮球部',
       ability: 'vo',
       value: 0.13,
-      member: ['明星昴流', '衣更真绪', '守泽千秋', '高峰翠']
+      member: ['明星昴流', '衣更真绪', '守泽千秋', '高峰翠'],
+      del: false,
     },
     {
       name: '演剧部',
       ability: 'pf',
       value: 0.10,
-      member: ['冰鹰北斗', '日日树涉', '真白友也']
+      member: ['冰鹰北斗', '日日树涉', '真白友也'],
+      del: false,
     },
     {
       name: '网球部',
       ability: 'pf',
       value: 0.10,
-      member: ['游木真', '姬宫桃李', '濑名泉', '仁兔成鸣']
+      member: ['游木真', '姬宫桃李', '濑名泉', '仁兔成鸣'],
+      del: false,
     },
     {
       name: '红茶部',
       ability: 'vo',
       value: 0.10,
-      member: ['天祥院英智', '朔间凛月', '紫之创']
+      member: ['天祥院英智', '朔间凛月', '紫之创'],
+      del: false,
     },
     {
       name: '弓道部',
       ability: 'da',
       value: 0.13,
-      member: ['伏见弓弦', '朱樱司', '莲巳敬人', '月永雷欧']
+      member: ['伏见弓弦', '朱樱司', '莲巳敬人', '月永雷欧'],
+      del: false,
     },
     {
       name: '轻音部',
       ability: 'da',
       value: 0.13,
-      member: ['朔间零', '大神晃牙', '葵日向', '葵裕太']
+      member: ['朔间零', '大神晃牙', '葵日向', '葵裕太'],
+      del: false,
     },
     {
       name: '海洋生物部',
       ability: 'pf',
       value: 0.10,
-      member: ['羽风薰', '深海奏汰', '神崎飒马']
+      member: ['羽风薰', '深海奏汰', '神崎飒马'],
+      del: false,
     },
     {
       name: '田径部',
       ability: 'vo',
       value: 0.10,
-      member: ['乙狩阿多尼斯', '鸣上岚', '天满光']
+      member: ['乙狩阿多尼斯', '鸣上岚', '天满光'],
+      del: false,
     },
     {
       name: '空手道部',
       ability: 'da',
       value: 0.05,
-      member: ['南云铁虎', '鬼龙红郎']
+      member: ['南云铁虎', '鬼龙红郎'],
+      del: false,
     },
     {
       name: '忍者同好会',
       ability: 'pf',
       value: 0.02,
-      member: ['仙石忍']
+      member: ['仙石忍'],
+      del: false,
     },
     {
       name: '学生会执行部',
       ability: 'vo',
       value: 0.13,
-      member: ['姬宫桃李', '衣更真绪', '天祥院英智', '莲巳敬人']
+      member: ['姬宫桃李', '衣更真绪', '天祥院英智', '莲巳敬人'],
+      del: false,
     },
     {
       name: '广播委员会',
       ability: 'da',
       value: 0.10,
-      member: ['仙石忍', '仁兔成鸣', '游木真']
+      member: ['仙石忍', '仁兔成鸣', '游木真'],
+      del: false,
     },
     {
       name: '名门子弟',
       ability: 'da',
       value: 0.10,
-      member: ['天祥院英智', '朱樱司', '姬宫桃李']
+      member: ['天祥院英智', '朱樱司', '姬宫桃李'],
+      del: false,
     },
     {
       name: '智慧眼镜',
       ability: 'vo',
       value: 0.05,
-      member: ['莲巳敬人', '游木真']
+      member: ['莲巳敬人', '游木真'],
+      del: false,
     },
     {
       name: '擅长缝纫',
       ability: 'pf',
       value: 0.05,
-      member: ['鬼龙红郎', '紫之创']
+      member: ['鬼龙红郎', '紫之创'],
+      del: false,
     },
     {
       name: '左撇子',
       ability: 'pf',
       value: 0.10,
-      member: ['葵裕太', '朔间凛月', '天祥院英智']
+      member: ['葵裕太', '朔间凛月', '天祥院英智'],
+      del: false,
     },
     {
       name: '模特经验者',
       ability: 'da',
       value: 0.10,
-      member: ['游木真', '鸣上岚', '濑名泉']
+      member: ['游木真', '鸣上岚', '濑名泉'],
+      del: false,
     },
     {
       name: '花粉症',
       ability: 'vo',
       value: 0.05,
-      member: ['衣更真绪', '大神晃牙']
+      member: ['衣更真绪', '大神晃牙'],
+      del: false,
     },
     {
       name: '朔间兄弟',
       ability: 'vo',
       value: 0.05,
-      member: ['朔间零', '朔间凛月']
+      member: ['朔间零', '朔间凛月'],
+      del: false,
     },
     {
       name: '三奇人',
       ability: 'pf',
       value: 0.10,
-      member: ['朔间零', '日日树涉', '深海奏汰']
+      member: ['朔间零', '日日树涉', '深海奏汰'],
+      del: false,
     },
     {
       name: '最喜欢妹妹',
       ability: 'da',
       value: 0.05,
-      member: ['月永雷欧', '鬼龙红郎']
+      member: ['月永雷欧', '鬼龙红郎'],
+      del: false,
     },
   ];
