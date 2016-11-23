@@ -133,7 +133,7 @@
   <h1 class="title-md text-center">偶像梦幻祭演唱会组队</h1>
   <h3 class="title-sm text-center">偶像梦幻祭演唱会组队</h3>
   <p class="btns-md">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片配置</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片数据</button>
     <button type="button" class="btn btn-primary" ng-click="configCharacter()">配置角色</button>
     <button type="button" class="btn btn-primary" ng-click="configTeam()">配置技能</button>
     <button type="button" class="btn btn-danger pull-right" ng-click="buildTeam()" ng-if="teamShow == false">生成组队</button>
@@ -141,7 +141,7 @@
     <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#profileModal">说明</button>
   </p>
   <p class="btns-sm">
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片配置</button>
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片数据</button>
     <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#profileModal">说明</button>
   </p>
   <p class="btns-sm">
@@ -155,15 +155,15 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="cardsModalLabel">读取/备份卡片配置</h4>
+          <h4 class="modal-title" id="cardsModalLabel">读取/备份卡片数据</h4>
         </div>
         <div class="modal-body">
           <textarea class="form-control" rows="12" ng-model="cardsJson"></textarea>
-          <div class="text-info">可以复制里面的内容，放到QQ收藏等常用的网络记事本内~KUMA<br/>下次需要使用时，粘贴上，点击读取配置即可还原卡片配置~KUMA</div>
+          <div class="text-info">可以复制里面的内容，放到QQ收藏等常用的网络记事本内~KUMA<br/>下次需要使用时，粘贴上，点击读取数据即可还原卡片数据~KUMA</div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" ng-click="loadCardsJson()">读取配置</button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCardsModal">清空卡片</button>
+          <button type="button" class="btn btn-primary" ng-click="loadCardsJson()">读取数据</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCardsModal">清空卡片数据</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         </div>
       </div>
@@ -173,10 +173,10 @@
     <div class="modal-dialog modal-md">
       <div class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4>确定要清空卡片吗？</h4>
-        <p>这会把您填写的所有卡片信息清空，还原到初始的状态哦KUMA</p>
+        <h4>确定要清空卡片数据吗？</h4>
+        <p>这会将您填写的所有卡片数据清空，还原到初始的状态哦KUMA</p>
         <p>
-          <button type="button" class="btn btn-danger" ng-click="removeCardsJson()">确定清空卡片</button>
+          <button type="button" class="btn btn-danger" ng-click="removeCardsJson()">确定清空卡片数据</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         </p>
       </div>
@@ -198,6 +198,7 @@
           <div><a href="javascript:;" class="glyphicon glyphicon-arrow-down text-success" title="下移"></a> 这个是将此卡片向下移动KUMA</div>
           <div><strong>卡名</strong> 是标志，是给您看出是哪张卡的，可填可不填KUMA</div>
           <div><strong>星级</strong> 和 <strong>等级</strong> 只和计算倍卡数据有关，不是倍卡也可以不用理...KUMA</div>
+          <div>卡片数据有本地缓存，不清除的情况下，刷新和下次打开，数据还是存在的，不过还是推荐备份卡片数据，可以电脑、手机上都能用的说KUMA</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
