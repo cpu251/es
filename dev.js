@@ -24,7 +24,7 @@
     }
     $scope.characterEdit = [];
     $scope.$watch("character", function(n, o){
-      if(n == o){
+      if(n == o || $scope.character == $scope.originalCharacter){
         return;
       }
       window.localStorage.setItem('ver', ver);
@@ -41,7 +41,7 @@
     }
     $scope.teamEdit = [];
     $scope.$watch("teams", function(n, o){
-      if(n == o){
+      if(n == o || $scope.teams == $scope.originalTeams){
         return;
       }
       $scope.teamShow = false;
@@ -231,6 +231,7 @@
       var tempCharacter = angular.copy($scope.originalCharacter);
       tempCharacter = tempCharacter.concat(angular.fromJson($scope.characterJson));
       $scope.character = tempCharacter;
+      window.localStorage.setItem('ver', ver);
       $scope.teamShow = false;
       /*$scope.configCharacterShow = false;
       $scope.configTeamShow = false;*/
@@ -292,6 +293,7 @@
     }
     $scope.loadTeamsJson = function(){
       $scope.teams = angular.fromJson($scope.teamsJson);
+      window.localStorage.setItem('ver', ver);
       $scope.teamShow = false;
       /*$scope.configCharacterShow = false;
        $scope.configTeamShow = false;*/
@@ -339,12 +341,11 @@
       $scope.teams_sort();
 
       $scope.da_max_team = $scope.max_team($scope.da_team, $scope.da_card, 'da');
-      console.log($scope.da_max_team);
-      /*$scope.vo_max_team = $scope.max_team($scope.vo_team, $scope.vo_card, 'vo');
+      $scope.vo_max_team = $scope.max_team($scope.vo_team, $scope.vo_card, 'vo');
       $scope.pf_max_team = $scope.max_team($scope.pf_team, $scope.pf_card, 'pf');
       $scope.da_max_team_2 = $scope.max_team($scope.da_team, $scope.da_card, 'da_2');
       $scope.vo_max_team_2 = $scope.max_team($scope.vo_team, $scope.vo_card, 'vo_2');
-      $scope.pf_max_team_2 = $scope.max_team($scope.pf_team, $scope.pf_card, 'pf_2');*/
+      $scope.pf_max_team_2 = $scope.max_team($scope.pf_team, $scope.pf_card, 'pf_2');
       $scope.teamShow = true;
       $scope.configCharacterShow = false;
       $scope.configTeamShow = false;
@@ -412,13 +413,13 @@
           }
         }
       }
-      $scope.da_team = $scope.da_team.concat(team_concat($scope.da_team));
-      $scope.vo_team = $scope.vo_team.concat(team_concat($scope.vo_team));
-      $scope.pf_team = $scope.pf_team.concat(team_concat($scope.pf_team));
+      $scope.da_team = team_concat($scope.da_team);
+      $scope.vo_team = team_concat($scope.vo_team);
+      $scope.pf_team = team_concat($scope.pf_team);
       function team_concat(team) {
         var temp_team = [];
-        for (t1 in team) {
-          for (t2 in team) {
+        for (var t1 in team) {
+          for (var t2 in team) {
             if (t1 < t2) {
               var flag = false;
               for (var m = 0; !flag && m < team[t1].member.length; m++) {
@@ -427,25 +428,59 @@
                 }
               }
               if (flag) {
-                var temp_team_concat = [];
-                temp_team_concat = temp_team_concat.concat(team[t1].member, team[t2].member);
-                temp_team_concat = $.uniqueSort(temp_team_concat);
-                if (temp_team_concat.length <= 5) {
-                  var character = temp_team_concat[m - 1];
-                  temp_team_concat.unshift(character);
-                  temp_team_concat = $.uniqueSort(temp_team_concat);
-                  temp_team.push({
-                    name: team[t1].name + ' + ' + team[t2].name,
-                    ability: team[t1].ability,
-                    value: Number(((team[t1].value / 100) + (team[t2].value / 100)).toFixed(2)),
-                    member: temp_team_concat,
-                  });
+                var temp_member = [];
+                temp_member = temp_member.concat(team[t1].member, team[t2].member);
+                temp_member = $.uniqueSort(temp_member);
+                if (temp_member.length <= 5) {
+                  var character = temp_member[m - 1];
+                  temp_member.unshift(character);
+                  temp_member = $.uniqueSort(temp_member);
+                  var name = team[t1].name + ' + ' + team[t2].name;
+                  for (var t3 in team) {
+                    if(temp_member.length == team[t3].member.length){
+                      var num = 0;
+                      for (var m in temp_member) {
+                        if($.inArray(temp_member[m], team[t3].member) > -1){
+                          num++;
+                        }
+                      }
+                      if(num == team[t3].member.length && temp_member[0] == team[t3].member[0]){
+                        flag = false;
+                      }
+                    }
+                  }
+                  for (var t3 in temp_team) {
+                    if(temp_member.length == temp_team[t3].member.length){
+                      var num = 0;
+                      for (var m in temp_member) {
+                        if($.inArray(temp_member[m], temp_team[t3].member) > -1){
+                          num++;
+                        }
+                      }
+                      if(num == temp_team[t3].member.length && temp_member[0] == temp_team[t3].member[0]){
+                        flag = false;
+                      }
+                    }
+                  }
+                  if(flag){
+                    temp_team.push({
+                      name: name,
+                      ability: team[t1].ability,
+                      value: team[t1].value + team[t2].value,
+                      member: temp_member,
+                      del: false,
+                    });
+                  }
                 }
               }
             }
           }
         }
-        return temp_team;
+        if(temp_team.length > 0){
+          team = team.concat(temp_team);
+          team = team_concat(team);
+        }
+        return team;
       }
     }
 
@@ -881,6 +916,13 @@
       del: false,
     },
     {
+      name: '流星队',
+      ability: 'vo',
+      value: 18,
+      member: ['南云铁虎', '高峰翠', '仙石忍', '深海奏汰', '守泽千秋'],
+      del: false,
+    },
+    {
       name: 'Fine',
       ability: 'pf',
       value: 13,
@@ -895,24 +937,17 @@
       del: false,
     },
     {
-      name: 'Knights',
-      ability: 'pf',
-      value: 18,
-      member: ['濑名泉', '朔间凛月', '鸣上岚', '朱樱司', '月永雷欧'],
-      del: false,
-    },
-    {
-      name: '流星队',
-      ability: 'vo',
-      value: 18,
-      member: ['南云铁虎', '高峰翠', '仙石忍', '深海奏汰', '守泽千秋'],
-      del: false,
-    },
-    {
       name: 'Ra*bits',
       ability: 'vo',
       value: 13,
       member: ['紫之创', '天满光', '真白友也', '仁兔成鸣'],
+      del: false,
+    },
+    {
+      name: 'Knights',
+      ability: 'pf',
+      value: 18,
+      member: ['濑名泉', '朔间凛月', '鸣上岚', '朱樱司', '月永雷欧'],
       del: false,
     },
     {
@@ -930,6 +965,13 @@
       del: false,
     },
     {
+      name: '弓道部',
+      ability: 'da',
+      value: 13,
+      member: ['伏见弓弦', '朱樱司', '莲巳敬人', '月永雷欧'],
+      del: false,
+    },
+    {
       name: '篮球部',
       ability: 'vo',
       value: 13,
@@ -944,10 +986,10 @@
       del: false,
     },
     {
-      name: '网球部',
-      ability: 'pf',
-      value: 10,
-      member: ['游木真', '姬宫桃李', '濑名泉', '仁兔成鸣'],
+      name: '轻音部',
+      ability: 'da',
+      value: 13,
+      member: ['朔间零', '大神晃牙', '葵日向', '葵裕太'],
       del: false,
     },
     {
@@ -958,31 +1000,10 @@
       del: false,
     },
     {
-      name: '弓道部',
-      ability: 'da',
-      value: 13,
-      member: ['伏见弓弦', '朱樱司', '莲巳敬人', '月永雷欧'],
-      del: false,
-    },
-    {
-      name: '轻音部',
-      ability: 'da',
-      value: 13,
-      member: ['朔间零', '大神晃牙', '葵日向', '葵裕太'],
-      del: false,
-    },
-    {
-      name: '海洋生物部',
+      name: '网球部',
       ability: 'pf',
       value: 10,
-      member: ['羽风薰', '深海奏汰', '神崎飒马'],
-      del: false,
-    },
-    {
-      name: '田径部',
-      ability: 'vo',
-      value: 10,
-      member: ['乙狩阿多尼斯', '鸣上岚', '天满光'],
+      member: ['游木真', '姬宫桃李', '濑名泉', '仁兔成鸣'],
       del: false,
     },
     {
@@ -993,10 +1014,24 @@
       del: false,
     },
     {
-      name: '忍者同好会',
+      name: '田径部',
+      ability: 'vo',
+      value: 10,
+      member: ['乙狩阿多尼斯', '鸣上岚', '天满光'],
+      del: false,
+    },
+    {
+      name: '海洋生物部',
       ability: 'pf',
-      value: 2,
-      member: ['仙石忍'],
+      value: 10,
+      member: ['羽风薰', '深海奏汰', '神崎飒马'],
+      del: false,
+    },
+    {
+      name: '广播委员会',
+      ability: 'da',
+      value: 10,
+      member: ['仙石忍', '仁兔成鸣', '游木真'],
       del: false,
     },
     {
@@ -1007,10 +1042,10 @@
       del: false,
     },
     {
-      name: '广播委员会',
-      ability: 'da',
-      value: 10,
-      member: ['仙石忍', '仁兔成鸣', '游木真'],
+      name: '忍者同好会',
+      ability: 'pf',
+      value: 2,
+      member: ['仙石忍'],
       del: false,
     },
     {
@@ -1035,13 +1070,6 @@
       del: false,
     },
     {
-      name: '左撇子',
-      ability: 'pf',
-      value: 10,
-      member: ['葵裕太', '朔间凛月', '天祥院英智'],
-      del: false,
-    },
-    {
       name: '模特经验者',
       ability: 'da',
       value: 10,
@@ -1053,6 +1081,20 @@
       ability: 'vo',
       value: 5,
       member: ['衣更真绪', '大神晃牙'],
+      del: false,
+    },
+    {
+      name: '左撇子',
+      ability: 'pf',
+      value: 10,
+      member: ['葵裕太', '朔间凛月', '天祥院英智'],
+      del: false,
+    },
+    {
+      name: '最喜欢妹妹',
+      ability: 'da',
+      value: 5,
+      member: ['月永雷欧', '鬼龙红郎'],
       del: false,
     },
     {
@@ -1069,24 +1111,17 @@
       member: ['朔间零', '日日树涉', '深海奏汰'],
       del: false,
     },
-    {
-      name: '最喜欢妹妹',
-      ability: 'da',
-      value: 5,
-      member: ['月永雷欧', '鬼龙红郎'],
-      del: false,
-    },
   ];
   var temporary_team = [
     {
-      name: '可选择的临时组队技能',
+      name: '可选择的临时组合技能',
       ability: '',
       value: 0,
       member: [],
       del: false,
     },
     {
-      name: '完成任务',
+      name: '任务完成',
       ability: 'vo',
       value: 10,
       member: ['衣更真绪', '莲巳敬人', '天祥院英智', '姬宫桃李'],

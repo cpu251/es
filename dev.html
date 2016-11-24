@@ -209,7 +209,7 @@
           <h4 class="modal-title" id="profileModalLabel">说明</h4>
         </div>
         <div class="modal-body text-info">
-          <div>首先要先填入你的卡片数据，至少要填入<span class="text-danger">15张</span>，然后点击 <strong class="text-danger">生成组队</strong> 就可以按照游戏内的组队技能，计算出数值最高的队伍KUMA</div>
+          <div>首先要先填入你的卡片数据，至少要填入<span class="text-danger">15张</span>，然后点击 <strong class="text-danger">生成组队</strong> 就可以按照游戏内的组合技能，计算出数值最高的队伍KUMA</div>
           <div class="text-warning">因为没有WIKI...所有没法获得所有卡片的数据，只能是自己填数值...KUMA</div>
           <div><a href="javascript:;" class="glyphicon glyphicon-plus text-primary" title="新增卡片"></a> 这个是在此卡片下面增加一张卡片KUMA</div>
           <div><a href="javascript:;" class="glyphicon glyphicon-remove text-danger" title="删除此卡片"></a> 这个是删除这张卡片KUMA</div>
@@ -245,7 +245,7 @@
     </p>
     <div class="alert alert-warning alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-      如果游戏新增了人物，可以在这里增加，再去增加组队技能，如果我有空增加了，会强制清除角色和组队技能的缓存KUMA
+      如果游戏新增了人物，可以在这里增加，再去增加组合技能，如果我有空增加了，会强制清除角色和组合技能的缓存KUMA
     </div>
     <table class="table table-bordered text-center config">
       <tbody>
@@ -253,12 +253,12 @@
           <td class="middle" ng-repeat="(i_2, c_2) in character" ng-if="i_2 - i_1 >= 0 && i_2 - i_1 < 4">
             <span ng-if="characterEdit[i_2] != true">{{c_2}}</span>
             <input type="text" class="form-control input-sm" name="character[{{i_2}}]" placeholder="请输入角色名字" ng-model="c_2" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true">
-            <a href="javascript:;" class="nowrap" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true" ng-click="confirmCharacter(i_2)">[确定]</a>
-            <a href="javascript:;" class="nowrap" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] != true" ng-click="editCharacter(i_2)">[修改]</a>
-            <a href="javascript:;" class="nowrap" ng-if="i_2 >= originalCharacter.length" ng-click="delCharacter(i_2)">[删除]</a>
+            <a href="javascript:;" class="glyphicon glyphicon-check text-success" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true" ng-click="confirmCharacter(i_2)"></a>
+            <a href="javascript:;" class="glyphicon glyphicon-edit text-primary" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] != true" ng-click="editCharacter(i_2)"></a>
+            <a href="javascript:;" class="glyphicon glyphicon-remove text-danger" ng-if="i_2 >= originalCharacter.length" ng-click="delCharacter(i_2)"></a>
           </td>
           <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 != 0 && characterEdit[character.length - 1] != true">
-            <a href="javascript:;" class="nowrap" ng-click="addCharacter()">[新增]</a>
+            <a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addCharacter()"></a>
           </td>
           <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 4 && character.length % 4 > 0 && characterEdit[character.length - 1] == true"></td>
           <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 3 && character.length % 4 > 0"></td>
@@ -266,7 +266,7 @@
         </tr>
         <tr ng-if="character.length % 4 == 0 && characterEdit[character.length - 1] != true">
           <td class="middle">
-            <a href="javascript:;" class="nowrap" ng-click="addCharacter()">[新增]</a>
+            <a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addCharacter()"></a>
           </td>
           <td class="middle"></td>
           <td class="middle"></td>
@@ -309,16 +309,16 @@
   </div>
 
   <div class="configTeam" ng-if="configTeamShow == true">
-    <div class="page-header team-title">配置组队技能数据</div>
+    <div class="page-header team-title">配置组合技能数据</div>
     <p class="btns-md">
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#teamsModal" ng-click="loadTeams()">读取/备份组队技能数据</button>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#teamsModal" ng-click="loadTeams()">读取/备份组合技能数据</button>
     </p>
     <p class="btns-sm">
-      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#teamsModal" ng-click="loadTeams()">读取/备份组队技能数据</button>
+      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#teamsModal" ng-click="loadTeams()">读取/备份组合技能数据</button>
     </p>
     <div class="alert alert-warning alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-      如果临时技能有误，可以在这里配置正确的临时技能，或者游戏增加新人物，改变了组队技能，可以在这里配置新的组队技能，如果我有空增加了，会强制清除角色和组队技能的缓存KUMA
+      如果临时技能有误，可以在这里配置正确的临时技能，或者游戏增加新人物，改变了组合技能，可以在这里配置新的组合技能，如果我有空增加了，会强制清除角色和组合技能的缓存KUMA
     </div>
     <div class="visible-lg-block">
       <table class="table table-bordered text-center config">
@@ -326,7 +326,7 @@
           <tr>
             <td class="middle">技能名</td>
             <td class="middle" style="width:120px;">属性</td>
-            <td class="middle" style="width:80px;">技能提升</td>
+            <td class="middle" style="width:80px;">提升</td>
             <td class="middle">角色1</td>
             <td class="middle">角色2</td>
             <td class="middle">角色3</td>
@@ -388,83 +388,112 @@
               </select>
             </td>
             <td class="middle" ng-class="teamClass(index)">
-              <a href="javascript:;" class="nowrap" ng-if="teamEdit[index] == true" ng-click="confirmTeam(index)">[确定]</a>
-              <a href="javascript:;" class="nowrap" ng-if="teamEdit[index] != true" ng-click="editTeam(index)">[修改]</a>
-              <a href="javascript:;" class="nowrap" ng-if="t.del == true" ng-click="delTeam(index)">[删除]</a>
+              <a href="javascript:;" class="glyphicon glyphicon-check text-success" ng-if="teamEdit[index] == true" ng-click="confirmTeam(index)"></a>
+              <a href="javascript:;" class="glyphicon glyphicon-edit text-primary" ng-if="teamEdit[index] != true" ng-click="editTeam(index)"></a>
+              <a href="javascript:;" class="glyphicon glyphicon-remove text-danger" ng-if="t.del == true" ng-click="delTeam(index)"></a>
             </td>
           </tr>
           <tr ng-if="teamEdit[teams.length - 1] != true">
+            <td class="middle"></td>
+            <td class="middle"></td>
+            <td class="middle"></td>
+            <td class="middle"></td>
+            <td class="middle"></td>
+            <td class="middle"></td>
+            <td class="middle"></td>
+            <td class="middle"></td>
             <td class="middle">
-              <a href="javascript:;" class="nowrap" ng-click="addTeam()">[新增技能]</a>
+              <a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addTeam()"></a>
             </td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="hidden-lg">
       <table class="table table-bordered table-condensed text-center font-small">
+        <colgroup>
+          <col width="20%">
+          <col width="20%">
+          <col width="20%">
+          <col width="20%">
+          <col width="20%">
+        </colgroup>
         <tbody ng-repeat="(index, t) in teams">
           <tr>
             <td colspan="2" class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.name}}</span>
+              <label>技能名</label>
+              <div ng-if="teamEdit[index] != true">{{t.name}}</div>
               <input type="text" class="form-control input-sm" placeholder="请输入技能名" ng-model="t.name" ng-if="teamEdit[index] == true">
             </td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'da'">舞蹈</td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'vo'">声乐</td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'pf'">表演</td>
+            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'da'">
+              <label>属性</label>
+              <div>舞蹈</div>
+            </td>
+            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'vo'">
+              <label>属性</label>
+              <div>声乐</div>
+            </td>
+            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'pf'">
+              <label>属性</label>
+              <div>表演</div>
+            </td>
             <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] == true">
+              <label>属性</label>
               <select class="form-control" ng-model="t.ability">
                 <option ng-repeat="a in ability" value="{{a.ability}}">{{a.name}}</option>
               </select>
             </td>
             <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.value}}%</span>
+              <label>提升</label>
+              <div ng-if="teamEdit[index] != true">{{t.value}}%</div>
               <div class="ub uac" ng-if="teamEdit[index] == true"><input type="number" class="form-control input-sm ubf1" placeholder="请输入技能提升百分数" ng-model="t.value">%</div>
             </td>
             <td class="middle" ng-class="teamClass(index)">
-              <a href="javascript:;" class="nowrap" ng-if="teamEdit[index] == true" ng-click="confirmTeam(index)">[确定]</a>
-              <a href="javascript:;" class="nowrap" ng-if="teamEdit[index] != true" ng-click="editTeam(index)">[修改]</a>
-              <a href="javascript:;" class="nowrap" ng-if="t.del == true" ng-click="delTeam(index)">[删除]</a>
+              <label>操作</label>
+              <div ng-if="teamEdit[index] == true"><a href="javascript:;" class="glyphicon glyphicon-check text-success" ng-click="confirmTeam(index)"></a></div>
+              <div ng-if="teamEdit[index] != true"><a href="javascript:;" class="glyphicon glyphicon-edit text-primary" ng-click="editTeam(index)"></a></div>
+              <div ng-if="t.del == true"><a href="javascript:;" class="glyphicon glyphicon-remove text-danger" ng-click="delTeam(index)"></a></div>
             </td>
           </tr>
           <tr>
             <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[0]}}</span>
+              <label>角色1</label>
+              <div ng-if="teamEdit[index] != true">{{t.member[0]}}</div>
               <select class="form-control" ng-model="t.member[0]" ng-if="teamEdit[index] == true">
                 <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[1] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
               </select>
             </td>
             <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[1]}}</span>
+              <label>角色2</label>
+              <div ng-if="teamEdit[index] != true">{{t.member[1]}}</div>
+              <div ng-if="teamEdit[index] != true && t.member[1] == null">&nbsp;</div>
               <select class="form-control" ng-model="t.member[1]" ng-if="teamEdit[index] == true">
                 <option value="">选择角色</option>
                 <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
               </select>
             </td>
             <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[2]}}</span>
+              <label>角色3</label>
+              <div ng-if="teamEdit[index] != true">{{t.member[2]}}</div>
+              <div ng-if="teamEdit[index] != true && t.member[2] == null">&nbsp;</div>
               <select class="form-control" ng-model="t.member[2]" ng-if="teamEdit[index] == true">
                 <option value="">选择角色</option>
                 <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[3] && c != t.member[4]">{{c}}</option>
               </select>
             </td>
             <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[3]}}</span>
+              <label>角色4</label>
+              <div ng-if="teamEdit[index] != true">{{t.member[3]}}</div>
+              <div ng-if="teamEdit[index] != true && t.member[3] == null">&nbsp;</div>
               <select class="form-control" ng-model="t.member[3]" ng-if="teamEdit[index] == true">
                 <option value="">选择角色</option>
                 <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[4]">{{c}}</option>
               </select>
             </td>
             <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[4]}}</span>
+              <label>角色5</label>
+              <div ng-if="teamEdit[index] != true">{{t.member[4]}}</div>
+              <div ng-if="teamEdit[index] != true && t.member[4] == null">&nbsp;</div>
               <select class="form-control" ng-model="t.member[4]" ng-if="teamEdit[index] == true">
                 <option value="">选择角色</option>
                 <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[3]">{{c}}</option>
@@ -474,13 +503,14 @@
         </tbody>
         <tbody>
         <tr ng-if="teamEdit[teams.length - 1] != true">
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle"></td>
           <td class="middle">
-            <a href="javascript:;" class="nowrap" ng-click="addTeam()">[新增技能]</a>
+            <label>新增</label>
+            <div><a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addTeam()"></a></div>
           </td>
-          <td class="middle"></td>
-          <td class="middle"></td>
-          <td class="middle"></td>
-          <td class="middle"></td>
         </tr>
         </tbody>
       </table>
@@ -491,15 +521,15 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="teamsModalLabel">读取/备份组队技能数据</h4>
+          <h4 class="modal-title" id="teamsModalLabel">读取/备份组合技能数据</h4>
         </div>
         <div class="modal-body">
           <textarea class="form-control" rows="12" ng-model="teamsJson"></textarea>
-          <div class="text-info">可以复制里面的内容，放到QQ收藏等常用的网络记事本内~KUMA<br/>下次需要使用时，粘贴上，点击读取数据即可还原组队技能数据~KUMA</div>
+          <div class="text-info">可以复制里面的内容，放到QQ收藏等常用的网络记事本内~KUMA<br/>下次需要使用时，粘贴上，点击读取数据即可还原组合技能数据~KUMA</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" ng-click="loadTeamsJson()">读取数据</button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeTeamsModal">重置组队技能数据</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeTeamsModal">重置组合技能数据</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         </div>
       </div>
@@ -509,10 +539,10 @@
     <div class="modal-dialog modal-md">
       <div class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4>确定要重置组队技能数据吗？</h4>
-        <p>这会将您新增的所有组队技能数据清空，还原到初始的状态哦KUMA</p>
+        <h4>确定要重置组合技能数据吗？</h4>
+        <p>这会将您新增的所有组合技能数据清空，还原到初始的状态哦KUMA</p>
         <p>
-          <button type="button" class="btn btn-danger" ng-click="removeTeamsJson()">确定重置组队技能数据</button>
+          <button type="button" class="btn btn-danger" ng-click="removeTeamsJson()">确定重置组合技能数据</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         </p>
       </div>
@@ -757,7 +787,7 @@
   </div>
 
   <div class="temporary-team">
-    <div class="page-header team-title">临时技能</div>
+    <div class="page-header team-title">临时组队技能</div>
     <select class="form-control config" ng-model="selectedTemporaryTeam" ng-options="(t.name + (t.ability == '' ? '' : '-' + (t.ability == 'da' ? '舞蹈(红)' : (t.ability == 'vo' ? '声乐(蓝)' : '表演(黄)')) + t.value + '%') + (t.member.length == 0 ? '' : '-' + t.member[0] + (t.member[1] == null ? '' : (',' + t.member[1])) + (t.member[2] == null ? '' : (',' + t.member[2])) + (t.member[3] == null ? '' : (',' + t.member[3])) + (t.member[4] == null ? '' : (',' + t.member[4])))) for t in temporary_team"></select>
   </div>
   <form role="form">
