@@ -825,7 +825,7 @@
   </div>
 
   <div class="temporary-team">
-    <div class="page-header team-title">临时组队技能</div>
+    <div class="page-header team-title">临时组合技能</div>
     <select class="form-control config" ng-model="selectedTemporaryTeam" ng-options="(t.name + (t.ability == '' ? '' : '-' + (t.ability == 'da' ? '舞蹈(红)' : (t.ability == 'vo' ? '声乐(蓝)' : '表演(黄)')) + t.value + '%') + (t.member.length == 0 ? '' : '-' + t.member[0] + (t.member[1] == null ? '' : (',' + t.member[1])) + (t.member[2] == null ? '' : (',' + t.member[2])) + (t.member[3] == null ? '' : (',' + t.member[3])) + (t.member[4] == null ? '' : (',' + t.member[4])))) for t in temporary_team"></select>
   </div>
   <form role="form">
