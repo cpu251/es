@@ -432,20 +432,56 @@ app.controller('esCtrl', function($scope) {
     function team_concat(team) {
       var temp_team = [];
       for (var t1 in team) {
+        if(team[t1].leader == null){
+          team[t1].leader = team[t1].member;
+        }
+        if(team[t1].key == null){
+          team[t1].key = [t1];
+        }
+      }
+      for (var t1 in team) {
         for (var t2 in team) {
           if (t1 < t2) {
             var flag = false;
             var leader = [];
-            if(team[t1].leader == null){
-              team[t1].leader = team[t1].member;
-            }
-            if(team[t2].leader == null){
-              team[t2].leader = team[t2].member;
-            }
             for (var m = 0; m < team[t1].leader.length; m++) {
               if ($.inArray(team[t1].leader[m], team[t2].leader) > -1) {
                 leader.push(team[t1].leader[m]);
                 flag = true;
+              }
+            }
+            var key = [];
+            key = key.concat(team[t1].key, team[t2].key);
+            key = $.uniqueSort(key);
+            key.sort();
+            if(key.length < team[t1].key.length + team[t2].key.length){
+              flag = false;
+            }else if(flag){
+              for(var t3 in team){
+                if(key.length == team[t3].key.length){
+                  var num = 0;
+                  for(var k in key){
+                    if(key[k] == team[t3].key[k]){
+                      num++;
+                    }
+                  }
+                  if(num == key.length){
+                    flag = false;
+                  }
+                }
+              }
+              for(var t3 in temp_team){
+                if(key.length == temp_team[t3].key.length){
+                  var num = 0;
+                  for(var k in key){
+                    if(key[k] == temp_team[t3].key[k]){
+                      num++;
+                    }
+                  }
+                  if(num == key.length){
+                    flag = false;
+                  }
+                }
               }
             }
             if (flag) {
@@ -454,46 +490,15 @@ app.controller('esCtrl', function($scope) {
               temp_member = $.uniqueSort(temp_member);
               if (temp_member.length <= 5) {
                 var name = team[t1].name + '+' + team[t2].name;
-                for (var t3 in team) {
-                  var name_match = name.match(new RegExp(team[t3].name, 'g'));
-                  if(name_match != null && name_match.length > 1){
-                    flag = false;
-                  }
-                  if(temp_member.length == team[t3].member.length){
-                    var num = 0;
-                    for (var m in temp_member) {
-                      if($.inArray(temp_member[m], team[t3].member) > -1){
-                        num++;
-                      }
-                    }
-                    if(num == team[t3].member.length && temp_member[0] == team[t3].member[0] && team[t1].name != team[t3].name && team[t2].name != team[t3].name){
-                      flag = false;
-                    }
-                  }
-                }
-                for (var t3 in temp_team) {
-                  if(temp_member.length == temp_team[t3].member.length){
-                    var num = 0;
-                    for (var m in temp_member) {
-                      if($.inArray(temp_member[m], temp_team[t3].member) > -1){
-                        num++;
-                      }
-                    }
-                    if(num == temp_team[t3].member.length && temp_member[0] == temp_team[t3].member[0]){
-                      flag = false;
-                    }
-                  }
-                }
-                if(flag){
-                  temp_team.push({
-                    name: name,
-                    ability: team[t1].ability,
-                    value: team[t1].value + team[t2].value,
-                    member: temp_member,
-                    del: false,
-                    leader: leader,
-                  });
-                }
+                temp_team.push({
+                  name: name,
+                  ability: team[t1].ability,
+                  value: team[t1].value + team[t2].value,
+                  member: temp_member,
+                  del: false,
+                  leader: leader,
+                  key: key,
+                });
               }
             }
           }
