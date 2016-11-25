@@ -435,19 +435,24 @@
           for (var t2 in team) {
             if (t1 < t2) {
               var flag = false;
-              for (var m = 0; !flag && m < team[t1].member.length; m++) {
-                if ($.inArray(team[t1].member[m], team[t2].member) > -1) {
+              var leader = [];
+              if(team[t1].leader == null){
+                team[t1].leader = team[t1].member;
+              }
+              if(team[t2].leader == null){
+                team[t2].leader = team[t2].member;
+              }
+              for (var m = 0; m < team[t1].leader.length; m++) {
+                if ($.inArray(team[t1].leader[m], team[t2].leader) > -1) {
+                  leader.push(team[t1].leader[m]);
                   flag = true;
                 }
               }
               if (flag) {
                 var temp_member = [];
-                temp_member = temp_member.concat(team[t1].member, team[t2].member);
+                temp_member = temp_member.concat(leader, team[t1].member, team[t2].member);
                 temp_member = $.uniqueSort(temp_member);
                 if (temp_member.length <= 5) {
-                  var character = temp_member[m - 1];
-                  temp_member.unshift(character);
-                  temp_member = $.uniqueSort(temp_member);
                   var name = team[t1].name + '+' + team[t2].name;
                   for (var t3 in team) {
                     var name_match = name.match(new RegExp(team[t3].name, 'g'));
@@ -461,7 +466,7 @@
                           num++;
                         }
                       }
-                      if(num == team[t3].member.length && temp_member[0] == team[t3].member[0]){
+                      if(num == team[t3].member.length && temp_member[0] == team[t3].member[0] && team[t1].name != team[t3].name && team[t2].name != team[t3].name){
                         flag = false;
                       }
                     }
@@ -486,6 +491,7 @@
                       value: team[t1].value + team[t2].value,
                       member: temp_member,
                       del: false,
+                      leader: leader,
                     });
                   }
                 }
