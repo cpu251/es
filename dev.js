@@ -15,6 +15,19 @@
     if(window.localStorage.getItem('ver') != null && window.localStorage.getItem('ver') < ver){
       window.localStorage.removeItem('character');
       window.localStorage.removeItem('teams');
+      window.localStorage.removeItem('readUpdate');
+    }
+
+    if(window.localStorage.getItem('readUpdate') != null){
+      $scope.readUpdate = window.localStorage.getItem('readUpdate');
+    }else{
+      $scope.readUpdate = 'false';
+    }
+
+    $scope.readUpdateFun = function(){
+      $scope.readUpdate = 'true';
+      window.localStorage.setItem('ver', ver);
+      window.localStorage.setItem('readUpdate', 'true');
     }
 
     $scope.originalCharacter = character;
@@ -435,8 +448,12 @@
                   var character = temp_member[m - 1];
                   temp_member.unshift(character);
                   temp_member = $.uniqueSort(temp_member);
-                  var name = team[t1].name + ' + ' + team[t2].name;
+                  var name = team[t1].name + '+' + team[t2].name;
                   for (var t3 in team) {
+                    var name_match = name.match(new RegExp(team[t3].name, 'g'));
+                    if(name_match != null && name_match.length > 1){
+                      flag = false;
+                    }
                     if(temp_member.length == team[t3].member.length){
                       var num = 0;
                       for (var m in temp_member) {
@@ -495,6 +512,7 @@
             vo: 0,
             pf: 0,
             all: 0,
+            value: 0,
             member: [],
             card: [],
           },
@@ -504,6 +522,7 @@
             vo: 0,
             pf: 0,
             all: 0,
+            value: 0,
             member: [],
             card: [],
           },
@@ -513,6 +532,7 @@
             vo: 0,
             pf: 0,
             all: 0,
+            value: 0,
             member: [],
             card: [],
           },
@@ -732,6 +752,7 @@
             vo: 0,
             pf: 0,
             all: 0,
+            value: 0,
             member: [],
             card: [],
           },
@@ -741,6 +762,7 @@
             vo: 0,
             pf: 0,
             all: 0,
+            value: 0,
             member: [],
             card: [],
           },
@@ -750,6 +772,7 @@
             vo: 0,
             pf: 0,
             all: 0,
+            value: 0,
             member: [],
             card: [],
           },
@@ -850,6 +873,7 @@
           temp_team.team[team_key].card[i] = temp_team.card[num + i];
         }
         if(temp_team.team[team_key].name != 'no_team'){
+          temp_team.team[team_key].value = team[team_value].value;
           if(team[team_value].ability == 'da'){
             da = parseInt(da * (1 + Number((team[team_value].value / 100).toFixed(2))));
           }else if(team[team_value].ability == 'vo'){
@@ -1114,7 +1138,7 @@
   ];
   var temporary_team = [
     {
-      name: '可选择的临时组合技能',
+      name: '可选择的临时组合技能（根据日服WIKI，不保证国服不改）',
       ability: '',
       value: 0,
       member: [],
@@ -1172,7 +1196,7 @@
     {
       name: '春假的野餐',
       ability: 'pf',
-      value: 10,
+      value: 15,
       member: ['大神晃牙', '伏见弓弦', '明星昴流', '姬宫桃李'],
       del: false,
     },
@@ -1186,7 +1210,7 @@
     {
       name: '母亲大海的伙伴',
       ability: 'da',
-      value: 10,
+      value: 15,
       member: ['神崎飒马', '深海奏汰', '羽风薰', '乙狩阿多尼斯'],
       del: false,
     },

@@ -81,7 +81,11 @@
         line-height: 1.2;
         width: 1ex;
         word-break: break-all;
+        word-wrap: break-word;
         white-space: pre-wrap;
+      }
+      .team-value{
+        margin-top: 0.3em;
       }
       .team-title{
         font-size: 20px;
@@ -137,9 +141,17 @@
       -webkit-box-flex:1;
       box-flex:1
     }
+    .uov {
+      -webkit-box-orient:vertical;
+      box-orient:vertical
+    }
     .uac {
       -webkit-box-align:center;
       box-align:center
+    }
+    .upc {
+      -webkit-box-pack:center;
+      box-pack:center
     }
   </style>
 </head>
@@ -147,6 +159,10 @@
 <div class="container">
   <h1 class="title-md text-center">偶像梦幻祭演唱会组队</h1>
   <h3 class="title-sm text-center">偶像梦幻祭演唱会组队</h3>
+  <div class="alert alert-warning alert-dismissible fade in" role="alert" ng-if="readUpdate != 'true'">
+    <button type="button" class="close" data-dismiss="alert" ng-click="readUpdateFun()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    2016/11/25 更新：配置角色和配置技能开启，增加可选择临时组合技能~~妈妈再也不担心我不会组组合技能了~~KUMA
+  </div>
   <p class="btns-md">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片数据</button>
     <button type="button" class="btn btn-primary" ng-if="configCharacterShow == false" ng-click="configCharacter(true)">配置角色</button>
@@ -218,6 +234,7 @@
           <div><strong>卡名</strong> 是标志，是给您看出是哪张卡的，可填可不填KUMA</div>
           <div><strong>星级</strong> 和 <strong>等级</strong> 只和计算倍卡数据有关，不是倍卡也可以不用理...KUMA</div>
           <div>卡片数据有本地缓存，不清除的情况下，刷新和下次打开，数据还是存在的，不过还是推荐备份卡片数据，可以电脑、手机上都能用的说KUMA</div>
+          <div class="text-warning">2LP前特大需要333334才能不触发技能情况下100%过的，2LP后特大需要50W，3LP紧急需要总值50W...KUMA</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -578,7 +595,10 @@
         </tr>
         <tr ng-repeat="(t_i, team) in da_max_team.team">
           <td class="middle danger">
-            <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+            <div class="ub uov uac">
+              <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+              <div class="team-value nowrap" ng-if="team.name!='no_team'">{{team.value}}%</div>
+            </div>
           </td>
           <td class="middle" ng-repeat="(c_i, card) in team.card" ng-class="cardColor(card)">
             <div>{{card.star}}★</div>
@@ -617,7 +637,10 @@
       </tr>
       <tr ng-repeat="(t_i, team) in da_max_team_2.team">
         <td class="middle danger">
-          <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+          <div class="ub uov uac">
+            <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+            <div class="team-value nowrap" ng-if="team.name!='no_team'">{{team.value}}%</div>
+          </div>
         </td>
         <td class="middle" ng-repeat="(c_i, card) in team.card" ng-class="cardColor(card)">
           <div>{{card.star}}★</div>
@@ -656,7 +679,10 @@
       </tr>
       <tr ng-repeat="(t_i, team) in vo_max_team.team">
         <td class="middle info">
-          <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+          <div class="ub uov uac">
+            <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+            <div class="team-value nowrap" ng-if="team.name!='no_team'">{{team.value}}%</div>
+          </div>
         </td>
         <td class="middle" ng-repeat="(c_i, card) in team.card" ng-class="cardColor(card)">
           <div>{{card.star}}★</div>
@@ -695,7 +721,10 @@
       </tr>
       <tr ng-repeat="(t_i, team) in vo_max_team_2.team">
         <td class="middle info">
-          <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+          <div class="ub uov uac">
+            <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+            <div class="team-value nowrap" ng-if="team.name!='no_team'">{{team.value}}%</div>
+          </div>
         </td>
         <td class="middle" ng-repeat="(c_i, card) in team.card" ng-class="cardColor(card)">
           <div>{{card.star}}★</div>
@@ -734,7 +763,10 @@
       </tr>
       <tr ng-repeat="(t_i, team) in pf_max_team.team">
         <td class="middle warning">
-          <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+          <div class="ub uov uac">
+            <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+            <div class="team-value nowrap" ng-if="team.name!='no_team'">{{team.value}}%</div>
+          </div>
         </td>
         <td class="middle" ng-repeat="(c_i, card) in team.card" ng-class="cardColor(card)">
           <div>{{card.star}}★</div>
@@ -773,7 +805,10 @@
       </tr>
       <tr ng-repeat="(t_i, team) in pf_max_team_2.team">
         <td class="middle warning">
-          <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+          <div class="ub uov uac">
+            <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+            <div class="team-value nowrap" ng-if="team.name!='no_team'">{{team.value}}%</div>
+          </div>
         </td>
         <td class="middle" ng-repeat="(c_i, card) in team.card" ng-class="cardColor(card)">
           <div>{{card.star}}★</div>
