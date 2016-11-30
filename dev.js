@@ -793,9 +793,11 @@
         pf: 0,
         all: 0,
       };
+      var team_arr = [t1, t2, t3];
 
       var num = 0;
-      $.each([t1, t2, t3], function(team_key, team_value){
+      for(var team_key in team_arr){
+        team_value = team_arr[team_key];
         num = num%5 == 0 ? num : num + 5 - num%5;
         if(team_value != 'no_team'){
           for(m in team[team_value].member){
@@ -812,10 +814,11 @@
           }
         }
         num += 5;
-      });
+      }
 
       num = 0;
-      $.each([t1, t2, t3], function(team_key, team_value){
+      for(var team_key in team_arr){
+        team_value = team_arr[team_key];
         num = num%5 == 0 ? num : num + 5 - num%5;
         if(team_value == 'no_team'){
           for(var i = 0, j = 0, max = 5, flag = false; j < max && i < card.length; flag && ((temp_team.key[num + j] = i) || true) && j++, i++){
@@ -864,10 +867,11 @@
           }
         }
         num += 5;
-      });
+      }
 
       num = 0;
-      $.each([t1, t2, t3], function(team_key, team_value){
+      for(var team_key in team_arr){
+        team_value = team_arr[team_key];
         var da = 0, vo = 0, pf = 0, all = 0;
         for(var i = 0; i < 5; i++){
           if(temp_team.card[num + i] != null){
@@ -902,7 +906,7 @@
         temp_team.pf += pf;
         temp_team.all += da + vo + pf;
         num += 5;
-      });
+      }
 
       return temp_team;
     }
