@@ -1,6 +1,6 @@
 console.log('作者：KUMA\n这是一个用来计算偶像梦幻祭演唱会组队数值的网页，运用了Bootstrap3, Jquery3, AngularJs来做的~~KUMA');
 
-var ver = 1612051726;
+var ver = 1702131404;
 var app = angular.module('esApp', []);
 app.controller('esCtrl', function($scope) {
   $('body').css('display', '');
@@ -933,11 +933,13 @@ var character = [
   '衣更真绪',
   '伏见弓弦',
   '鸣上岚',
+  '影片美伽',
   '莲巳敬人',
   '天祥院英智',
   '羽风薰',
   '濑名泉',
   '守泽千秋',
+  '斋宫宗',
   '鬼龙红郎',
   '日日树涉',
   '深海奏汰',
@@ -1001,6 +1003,13 @@ var team = [
     ability: 'vo',
     value: 5,
     member: ['葵日向', '葵裕太'],
+    del: false,
+  },
+  {
+    name: 'Valkyrie',
+    ability: 'pf',
+    value: 5,
+    member: ['斋宫宗', '影片美伽'],
     del: false,
   },
   {
@@ -1088,6 +1097,13 @@ var team = [
     del: false,
   },
   {
+    name: '手工部',
+    ability: 'vo',
+    value: 5,
+    member: ['斋宫宗', '影片美伽'],
+    del: false,
+  },
+  {
     name: '名门子弟',
     ability: 'da',
     value: 10,
@@ -1104,8 +1120,8 @@ var team = [
   {
     name: '擅长缝纫',
     ability: 'pf',
-    value: 5,
-    member: ['鬼龙红郎', '紫之创'],
+    value: 10,
+    member: ['鬼龙红郎', '紫之创', '斋宫宗'],
     del: false,
   },
   {
@@ -1227,6 +1243,83 @@ var temporary_team = [
     ability: 'da',
     value: 15,
     member: ['神崎飒马', '深海奏汰', '羽风薰', '乙狩阿多尼斯'],
+    del: false,
+  },
+  {
+    name: '玩具所见之梦',
+    ability: 'pf',
+    value: 13,
+    member: ['影片美伽', '斋宫宗', '仁兔成鸣', '天满光'],
+    del: false,
+  },
+  {
+    name: '梦之王国的王子殿下',
+    ability: 'da',
+    value: 13,
+    member: ['日日树涉', '冰鹰北斗', '真白友也', '莲巳敬人'],
+    del: false,
+  },
+  {
+    name: '雨音的和声',
+    ability: 'pf',
+    value: 10,
+    member: ['朔间零', '葵日向', '大神晃牙', '葵裕太'],
+    del: false,
+  },
+  {
+    name: '舞台上闹腾的孩子们',
+    ability: 'da',
+    value: 15,
+    member: ['羽风薰', '天祥院英智', '守泽千秋', '濑名泉'],
+    del: false,
+  },
+  {
+    name: '空中奔跑的青春',
+    ability: 'vo',
+    value: 10,
+    member: ['守泽千秋', '明星昴流', '衣更真绪', '高峰翠'],
+    del: false,
+  },
+  {
+    name: '夏天的同伴与冰淇淋！',
+    ability: 'pf',
+    value: 13,
+    member: ['仁兔成鸣', '影片美伽', '游木真', '葵裕太'],
+    del: false,
+  },
+  {
+    name: '冒泡冒泡金鱼',
+    ability: 'da',
+    value: 15,
+    member: ['姬宫桃李', '紫之创', '仁兔成鸣', '伏见弓弦'],
+    del: false,
+  },
+  {
+    name: '弓失的名手们',
+    ability: 'da',
+    value: 15,
+    member: ['月永雷欧', '朱樱司', '莲巳敬人', '伏见弓弦'],
+    del: false,
+  },
+  {
+    name: '安达卢西亚的热情',
+    ability: 'vo',
+    value: 13,
+    member: ['冰鹰北斗', '衣更真绪', '真白友也', '仙石忍'],
+    del: false,
+  },
+  {
+    name: '千夜一夜的盗贼团',
+    ability: 'da',
+    value: 10,
+    member: ['乙狩阿多尼斯', '羽风薰', '大神晃牙', '朔间零'],
+    del: false,
+  },
+  {
+    name: '咖啡的诱惑',
+    ability: 'pf',
+    value: 13,
+    member: ['朱樱司', '天满光', '鸣上岚', '葵裕太'],
     del: false,
   },
 ];
