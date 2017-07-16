@@ -1,6 +1,6 @@
 console.log('作者：KUMA\n这是一个用来计算偶像梦幻祭演唱会组队数值的网页，运用了Bootstrap3, Jquery3, AngularJs来做的~~KUMA');
 
-var ver = 1702131404;
+var ver = 1707161200;
 var app = angular.module('esApp', []);
 app.controller('esCtrl', function($scope) {
   $('body').css('display', '');
@@ -923,11 +923,13 @@ var character = [
   '葵裕太',
   '天满光',
   '朱樱司',
+  '春川宙',
   '明星昴流',
   '冰鹰北斗',
   '游木真',
   '神崎飒马',
   '乙狩阿多尼斯',
+  '逆先夏目',
   '大神晃牙',
   '朔间凛月',
   '衣更真绪',
@@ -946,6 +948,7 @@ var character = [
   '朔间零',
   '仁兔成鸣',
   '月永雷欧',
+  '青叶纺',
 ];
 
 var team = [
@@ -1013,10 +1016,10 @@ var team = [
     del: false,
   },
   {
-    name: '弓道部',
+    name: 'Switch',
     ability: 'da',
-    value: 13,
-    member: ['伏见弓弦', '朱樱司', '莲巳敬人', '月永雷欧'],
+    value: 10,
+    member: ['春川宙', '逆先夏目', '青叶纺'],
     del: false,
   },
   {
@@ -1076,10 +1079,10 @@ var team = [
     del: false,
   },
   {
-    name: '广播委员会',
+    name: '弓道部',
     ability: 'da',
-    value: 10,
-    member: ['仙石忍', '仁兔成鸣', '游木真'],
+    value: 13,
+    member: ['伏见弓弦', '朱樱司', '莲巳敬人', '月永雷欧'],
     del: false,
   },
   {
@@ -1097,10 +1100,17 @@ var team = [
     del: false,
   },
   {
+    name: '广播委员会',
+    ability: 'da',
+    value: 10,
+    member: ['仙石忍', '仁兔成鸣', '游木真'],
+    del: false,
+  },
+  {
     name: '手工部',
     ability: 'vo',
-    value: 5,
-    member: ['斋宫宗', '影片美伽'],
+    value: 10,
+    member: ['斋宫宗', '影片美伽', '青叶纺'],
     del: false,
   },
   {
@@ -1113,15 +1123,15 @@ var team = [
   {
     name: '智慧眼镜',
     ability: 'vo',
-    value: 5,
-    member: ['莲巳敬人', '游木真'],
+    value: 10,
+    member: ['莲巳敬人', '游木真', '青叶纺'],
     del: false,
   },
   {
     name: '擅长缝纫',
     ability: 'pf',
-    value: 10,
-    member: ['鬼龙红郎', '紫之创', '斋宫宗'],
+    value: 13,
+    member: ['鬼龙红郎', '紫之创', '斋宫宗', '青叶纺'],
     del: false,
   },
   {
@@ -1164,6 +1174,13 @@ var team = [
     ability: 'pf',
     value: 10,
     member: ['朔间零', '日日树涉', '深海奏汰'],
+    del: false,
+  },
+  {
+    name: '图书委员',
+    ability: 'vo',
+    value: 2,
+    member: ['青叶纺'],
     del: false,
   },
 ];
@@ -1320,6 +1337,111 @@ var temporary_team = [
     ability: 'pf',
     value: 13,
     member: ['朱樱司', '天满光', '鸣上岚', '葵裕太'],
+    del: false,
+  },
+  {
+    name: '舞台的画框',
+    ability: 'vo',
+    value: 10,
+    member: ['真白友也', '日日树涉', '冰鹰北斗', '逆先夏目'],
+    del: false,
+  },
+  {
+    name: '多彩蔬菜',
+    ability: 'da',
+    value: 13,
+    member: ['高峰翠', '南云铁虎', '深海奏汰', '神崎飒马'],
+    del: false,
+  },
+  {
+    name: 'BADBOYS',
+    ability: 'pf',
+    value: 10,
+    member: ['天满光', '仁兔成鸣', '真白友也', '紫之创'],
+    del: false,
+  },
+  {
+    name: '睿智的回顾',
+    ability: 'da',
+    value: 13,
+    member: ['莲巳敬人', '游木真', '日日树涉', '冰鹰北斗'],
+    del: false,
+  },
+  {
+    name: '静夜的夜曲',
+    ability: 'vo',
+    value: 13,
+    member: ['斋宫宗', '鬼龙红郎', '青叶纺', '紫之创'],
+    del: false,
+  },
+  {
+    name: '偏心时间',
+    ability: 'pf',
+    value: 18,
+    member: ['逆先夏目', '朔间零', '深海奏汰', '日日树涉', '斋宫宗'],
+    del: false,
+  },
+  {
+    name: '五奇人',
+    ability: 'da',
+    value: 18,
+    member: ['逆先夏目', '朔间零', '深海奏汰', '日日树涉', '斋宫宗'],
+    del: false,
+  },
+  {
+    name: '冰上绽放的花',
+    ability: 'pf',
+    value: 13,
+    member: ['濑名泉', '羽风薰', '朱樱司', '月永雷欧'],
+    del: false,
+  },
+  {
+    name: '香茶馆',
+    ability: 'vo',
+    value: 13,
+    member: ['紫之创', '明星昴流', '守泽千秋', '羽风薰'],
+    del: false,
+  },
+  {
+    name: '四兽之拳',
+    ability: 'da',
+    value: 13,
+    member: ['南云铁虎', '鬼龙红郎', '葵日向', '大神晃牙'],
+    del: false,
+  },
+  {
+    name: '心的花束',
+    ability: 'vo',
+    value: 13,
+    member: ['鸣上岚', '青叶纺', '天满光', '影片美伽'],
+    del: false,
+  },
+  {
+    name: '绝对服从',
+    ability: 'da',
+    value: 13,
+    member: ['伏见弓弦', '姬宫桃李', '天祥院英智', '朱樱司'],
+    del: false,
+  },
+  {
+    name: '闪闪发光的一年生',
+    ability: 'pf',
+    value: 13,
+    member: ['葵裕太', '仙石忍', '高峰翠', '守泽千秋'],
+    del: false,
+  },
+  {
+    name: '卡片使用',
+    ability: 'vo',
+    value: 13,
+    member: ['大神晃牙', '朱樱司', '南云铁虎', '真白友也'],
+    del: false,
+  },
+  {
+    name: '睡衣时间',
+    ability: 'vo',
+    value: 10,
+    member: ['大神晃牙', '朔间凛月', '衣更真绪', '影片美伽'],
     del: false,
   },
 ];
