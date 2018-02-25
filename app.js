@@ -1502,7 +1502,7 @@ var temporary_team = [
         del: false,
     },
     {
-        name: 'Dead Man's',
+        name: "Dead Man's",
         ability: 'pf',
         value: 13,
         member: ['朔间零', '莲巳敬人', '大神晃牙', '鬼龙红郎'],
