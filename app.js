@@ -1,6 +1,6 @@
 console.log('作者：KUMA\n这是一个用来计算偶像梦幻祭演唱会组队数值的网页，运用了Bootstrap3, Jquery3, AngularJs来做的~~KUMA');
 
-var ver = 1707180900;
+var ver = 1802251500;
 var app = angular.module('esApp', []);
 app.controller('esCtrl', function($scope) {
   $('body').css('display', '');
@@ -949,6 +949,7 @@ var character = [
   '仁兔成鸣',
   '月永雷欧',
   '青叶纺',
+  '三毛搞斑',
 ];
 
 var team = [
@@ -1023,6 +1024,13 @@ var team = [
     del: false,
   },
   {
+    name: 'MaM',
+    ability: 'pf',
+    value: 2,
+    member: ['三毛搞斑'],
+    del: false,
+  },
+  {
     name: '篮球部',
     ability: 'vo',
     value: 13,
@@ -1068,7 +1076,7 @@ var team = [
     name: '田径部',
     ability: 'vo',
     value: 10,
-    member: ['乙狩阿多尼斯', '鸣上岚', '天满光'],
+    member: ['乙狩阿多尼斯', '鸣上岚', '天满光', '三毛搞斑'],
     del: false,
   },
   {
