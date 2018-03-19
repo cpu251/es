@@ -1075,7 +1075,7 @@ var team = [
   {
     name: '田径部',
     ability: 'vo',
-    value: 10,
+    value: 13,
     member: ['乙狩阿多尼斯', '鸣上岚', '天满光', '三毛搞斑'],
     del: false,
   },
