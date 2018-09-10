@@ -1042,7 +1042,7 @@ var team = [
     del: false,
   },
   {
-    name: 'Eve',
+    name: 'Adam',
     ability: 'pf',
     value: 20,
     member: ['七种茨','乱凪砂'],
