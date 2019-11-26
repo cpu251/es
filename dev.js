@@ -1,6 +1,6 @@
 console.log('作者：KUMA\n这是一个用来计算偶像梦幻祭演唱会组队数值的网页，运用了Bootstrap3, Jquery3, AngularJs来做的~~KUMA');
 
-var ver = 1707180900;
+var ver = 1911260800;
 var app = angular.module('esApp', []);
 app.controller('esCtrl', function($scope) {
   $('body').css('display', '');
@@ -949,6 +949,11 @@ var character = [
   '仁兔成鸣',
   '月永雷欧',
   '青叶纺',
+  '三毛搞斑',
+  '涟纯',
+  '巴日和',
+  '七种茨',
+  '乱凪砂',
 ];
 
 var team = [
@@ -1023,6 +1028,34 @@ var team = [
     del: false,
   },
   {
+    name: 'MaM',
+    ability: 'pf',
+    value: 2,
+    member: ['三毛搞斑'],
+    del: false,
+  },
+  {
+    name: 'Eve',
+    ability: 'pf',
+    value: 10,
+    member: ['涟纯','巴日和'],
+    del: false,
+  },
+  {
+    name: 'Adam',
+    ability: 'pf',
+    value: 10,
+    member: ['七种茨','乱凪砂'],
+    del: false,
+  },
+  {
+    name: 'Eden',
+    ability: 'pf',
+    value: 15,
+    member: ['涟纯','巴日和','七种茨','乱凪砂'],
+    del: false,
+  },
+  {
     name: '篮球部',
     ability: 'vo',
     value: 13,
@@ -1067,8 +1100,8 @@ var team = [
   {
     name: '田径部',
     ability: 'vo',
-    value: 10,
-    member: ['乙狩阿多尼斯', '鸣上岚', '天满光'],
+    value: 13,
+    member: ['乙狩阿多尼斯', '鸣上岚', '天满光', '三毛搞斑'],
     del: false,
   },
   {
@@ -1449,6 +1482,111 @@ var temporary_team = [
     ability: 'vo',
     value: 10,
     member: ['大神晃牙', '朔间凛月', '衣更真绪', '影片美伽'],
+    del: false,
+  },
+  {
+    name: '跑道',
+    ability: 'da',
+    value: 10,
+    member: ['游木真', '濑名泉', '鸣上岚', '三毛搞斑'],
+    del: false,
+  },
+  {
+    name: '忍者集団『忍ばず者』',
+    ability: 'pf',
+    value: 13,
+    member: ['仙石忍', '天满光', '春川宙', '葵日向'],
+    del: false,
+  },
+  {
+    name: '书呆子',
+    ability: 'da',
+    value: 13,
+    member: ['青叶纺', '莲巳敬人', '紫之创', '高峰翠'],
+    del: false,
+  },
+  {
+    name: '小小的国王',
+    ability: 'pf',
+    value: 13,
+    member: ['朱樱司', '高峰翠', '天满光', '姬宫桃李'],
+    del: false,
+  },
+  {
+    name: '协奏曲',
+    ability: 'vo',
+    value: 13,
+    member: ['三毛搞斑', '月永雷欧', '天祥院英智', '莲巳敬人'],
+    del: false,
+  },
+  {
+    name: '妖怪七变化',
+    ability: 'da',
+    value: 13,
+    member: ['葵日向', '真白友也', '春川宙', '南云铁虎'],
+    del: false,
+  },
+  {
+    name: "Dead Man's",
+    ability: 'pf',
+    value: 13,
+    member: ['朔间零', '莲巳敬人', '大神晃牙', '鬼龙红郎'],
+    del: false,
+  },
+  {
+    name: '舞蹈骑士热',
+    ability: 'vo',
+    value: 10,
+    member: ['日日树涉', '天祥院英智', '伏见弓弦', '姬宫桃李'],
+    del: false,
+  },
+  {
+    name: '好胃口♪',
+    ability: 'pf',
+    value: 13,
+    member: ['南云铁虎', '乙狩阿多尼斯', '鬼龙红郎', '濑名泉'],
+    del: false,
+  },
+  {
+    name: '天使和兔子的故事',
+    ability: 'pf',
+    value: 10,
+    member: ['仁兔成鸣', '紫之创', '真白友也', '天满光'],
+    del: false,
+  },
+  {
+    name: 'Show Time！',
+    ability: 'vo',
+    value: 13,
+    member: ['春川宙', '日日树涉', '逆先夏目', '斋宫宗'],
+    del: false,
+  },
+  {
+    name: '花札',
+    ability: 'da',
+    value: 10,
+    member: ['神崎飒马', '莲巳敬人', '鬼龙红郎', '仙石忍'],
+    del: false,
+  },
+  {
+    name: '定制',
+    ability: 'vo',
+    value: 13,
+    member: ['明星昴流', '朔间零', '濑名泉', '葵裕太'],
+    del: false,
+  },
+  {
+    name: '森林中的生存战争',
+    ability: 'vo',
+    value: 13,
+    member: ['鬼龙红郎', '仁兔成鸣', '仙石忍', '神崎飒马'],
+    del: false,
+  },
+  {
+    name: '泰迪熊',
+    ability: 'pf',
+    value: 13,
+    member: ['影片美伽', '青叶纺', '乙狩阿多尼斯', '月永雷欧'],
     del: false,
   },
 ];
