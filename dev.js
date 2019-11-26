@@ -348,9 +348,9 @@ app.controller('esCtrl', function($scope) {
         $scope.cards[c].pf = 0;
       }
     }
-    $scope.da_card = [], $scope.vo_card = [], $scope.pf_card = [];
+    $scope.da_card = [], $scope.vo_card = [], $scope.pf_card = [], $scope.all_card = [];
     $scope.cards_sort();
-    $scope.da_team = [], $scope.vo_team = [], $scope.pf_team = [];
+    $scope.da_team = [], $scope.vo_team = [], $scope.pf_team = [], $scope.all_team = [];
     $scope.teams_sort();
 
     $scope.da_max_team = $scope.max_team($scope.da_team, $scope.da_card, 'da');
@@ -359,6 +359,7 @@ app.controller('esCtrl', function($scope) {
     $scope.da_max_team_2 = $scope.max_team($scope.da_team, $scope.da_card, 'da_2');
     $scope.vo_max_team_2 = $scope.max_team($scope.vo_team, $scope.vo_card, 'vo_2');
     $scope.pf_max_team_2 = $scope.max_team($scope.pf_team, $scope.pf_card, 'pf_2');
+    $scope.all_max_team = $scope.max_team($scope.all_team, $scope.all_card, 'all');
     $scope.teamShow = true;
     $scope.configCharacterShow = false;
     $scope.configTeamShow = false;
@@ -408,6 +409,17 @@ app.controller('esCtrl', function($scope) {
       }
       return b_pf - a_pf;
     });
+    $scope.all_card = $scope.all_card.concat($scope.cards);
+    $scope.all_card.sort(function (a, b) {
+      var a_all = a.da + a.vo + a.pf, b_all = b.da + b.vo + b.pf;
+      if(a.times && typeof($scope.times[a.star]) != 'undefined' && typeof($scope.times[a.star][a.level]) != 'undefined'){
+        a_all *= $scope.times[a.star][a.level];
+      }
+      if(b.times && typeof($scope.times[b.star]) != 'undefined' && typeof($scope.times[b.star][b.level]) != 'undefined'){
+        b_all *= $scope.times[a.star][a.level];
+      }
+      return b_all - a_all;
+    });
   }
 
   $scope.teams_sort = function(){
@@ -424,11 +436,13 @@ app.controller('esCtrl', function($scope) {
         } else if (tempTeams[i].ability == 'pf') {
           $scope.pf_team.push(tempTeams[i]);
         }
+        $scope.all_team.push(tempTeams[i]);
       }
     }
     $scope.da_team = team_concat($scope.da_team);
     $scope.vo_team = team_concat($scope.vo_team);
     $scope.pf_team = team_concat($scope.pf_team);
+    $scope.all_team = team_concat($scope.all_team);
     function team_concat(team) {
       var temp_team = [];
       for (var t1 in team) {
