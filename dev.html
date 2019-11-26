@@ -8,10 +8,10 @@
   <meta name="keywords" content="偶像梦幻祭,演唱会,组队">
   <meta name="description" content="一个计算偶像梦幻祭演唱会组队数值的网站~~KUMA">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-  <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="http://cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+  <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
   <style>
     *{
       font-family: "Microsoft Yahei", "Simsun";
@@ -164,7 +164,7 @@
   <h3 class="title-sm text-center">偶像梦幻祭演唱会组队</h3>
   <div class="alert alert-warning alert-dismissible fade in" role="alert" ng-if="readUpdate != 'true'">
     <button type="button" class="close" data-dismiss="alert" ng-click="readUpdateFun()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-    <div>2017/07/16 更新：新增Switch组合成员以及组队技能，临时组合技能更新到有三毛缟斑氪金池之前一期KUMA</div>
+    <div>2018/09/10 更新：新增Adam组合成员以及组队技能KUMA</div>
   </div>
   <p class="btns-md">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardsModal" ng-click="loadCards()">读取/备份卡片数据</button>
@@ -269,29 +269,29 @@
     </div>
     <table class="table table-bordered text-center config">
       <tbody>
-        <tr ng-repeat="(i_1, c_1) in character" ng-if="i_1 % 4 == 0">
-          <td class="middle" ng-repeat="(i_2, c_2) in character" ng-if="i_2 - i_1 >= 0 && i_2 - i_1 < 4">
-            <span ng-if="characterEdit[i_2] != true">{{c_2}}</span>
-            <input type="text" class="form-control input-sm" name="character[{{i_2}}]" placeholder="请输入角色名字" ng-model="c_2" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true">
-            <a href="javascript:;" class="glyphicon glyphicon-check text-success" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true" ng-click="confirmCharacter(i_2)"></a>
-            <a href="javascript:;" class="glyphicon glyphicon-edit text-primary" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] != true" ng-click="editCharacter(i_2)"></a>
-            <a href="javascript:;" class="glyphicon glyphicon-remove text-danger" ng-if="i_2 >= originalCharacter.length" ng-click="delCharacter(i_2)"></a>
-          </td>
-          <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 != 0 && characterEdit[character.length - 1] != true">
-            <a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addCharacter()"></a>
-          </td>
-          <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 4 && character.length % 4 > 0 && characterEdit[character.length - 1] == true"></td>
-          <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 3 && character.length % 4 > 0"></td>
-          <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 2 && character.length % 4 > 0"></td>
-        </tr>
-        <tr ng-if="character.length % 4 == 0 && characterEdit[character.length - 1] != true">
-          <td class="middle">
-            <a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addCharacter()"></a>
-          </td>
-          <td class="middle"></td>
-          <td class="middle"></td>
-          <td class="middle"></td>
-        </tr>
+      <tr ng-repeat="(i_1, c_1) in character" ng-if="i_1 % 4 == 0">
+        <td class="middle" ng-repeat="(i_2, c_2) in character" ng-if="i_2 - i_1 >= 0 && i_2 - i_1 < 4">
+          <span ng-if="characterEdit[i_2] != true">{{c_2}}</span>
+          <input type="text" class="form-control input-sm" name="character[{{i_2}}]" placeholder="请输入角色名字" ng-model="c_2" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true">
+          <a href="javascript:;" class="glyphicon glyphicon-check text-success" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] == true" ng-click="confirmCharacter(i_2)"></a>
+          <a href="javascript:;" class="glyphicon glyphicon-edit text-primary" ng-if="i_2 >= originalCharacter.length && characterEdit[i_2] != true" ng-click="editCharacter(i_2)"></a>
+          <a href="javascript:;" class="glyphicon glyphicon-remove text-danger" ng-if="i_2 >= originalCharacter.length" ng-click="delCharacter(i_2)"></a>
+        </td>
+        <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 != 0 && characterEdit[character.length - 1] != true">
+          <a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addCharacter()"></a>
+        </td>
+        <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 4 && character.length % 4 > 0 && characterEdit[character.length - 1] == true"></td>
+        <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 3 && character.length % 4 > 0"></td>
+        <td class="middle" ng-if="parseInt(i_1 / 4) == parseInt(character.length / 4) && character.length % 4 < 2 && character.length % 4 > 0"></td>
+      </tr>
+      <tr ng-if="character.length % 4 == 0 && characterEdit[character.length - 1] != true">
+        <td class="middle">
+          <a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addCharacter()"></a>
+        </td>
+        <td class="middle"></td>
+        <td class="middle"></td>
+        <td class="middle"></td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -343,89 +343,89 @@
     <div class="visible-lg-block">
       <table class="table table-bordered text-center config">
         <thead>
-          <tr>
-            <td class="middle">技能名</td>
-            <td class="middle" style="width:120px;">属性</td>
-            <td class="middle" style="width:80px;">提升</td>
-            <td class="middle">角色1</td>
-            <td class="middle">角色2</td>
-            <td class="middle">角色3</td>
-            <td class="middle">角色4</td>
-            <td class="middle">角色5</td>
-            <td class="middle">操作</td>
-          </tr>
+        <tr>
+          <td class="middle">技能名</td>
+          <td class="middle" style="width:120px;">属性</td>
+          <td class="middle" style="width:80px;">提升</td>
+          <td class="middle">角色1</td>
+          <td class="middle">角色2</td>
+          <td class="middle">角色3</td>
+          <td class="middle">角色4</td>
+          <td class="middle">角色5</td>
+          <td class="middle">操作</td>
+        </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="(index, t) in teams">
-            <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.name}}</span>
-              <input type="text" class="form-control" placeholder="请输入技能名" ng-model="t.name" ng-if="teamEdit[index] == true">
-            </td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'da'">舞蹈</td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'vo'">声乐</td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'pf'">表演</td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] == true">
-              <select class="form-control" ng-model="t.ability">
-                <option ng-repeat="a in ability" value="{{a.ability}}">{{a.name}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.value}}%</span>
-              <div class="ub uac" ng-if="teamEdit[index] == true"><input type="number" class="form-control ubf1" placeholder="请输入技能提升百分数" ng-model="t.value">%</div>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[0]}}</span>
-              <select class="form-control" ng-model="t.member[0]" ng-if="teamEdit[index] == true">
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[1] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[1]}}</span>
-              <select class="form-control" ng-model="t.member[1]" ng-if="teamEdit[index] == true">
-                <option value="">选择角色</option>
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[2]}}</span>
-              <select class="form-control" ng-model="t.member[2]" ng-if="teamEdit[index] == true">
-                <option value="">选择角色</option>
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[3] && c != t.member[4]">{{c}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[3]}}</span>
-              <select class="form-control" ng-model="t.member[3]" ng-if="teamEdit[index] == true">
-                <option value="">选择角色</option>
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[4]">{{c}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <span ng-if="teamEdit[index] != true">{{t.member[4]}}</span>
-              <select class="form-control" ng-model="t.member[4]" ng-if="teamEdit[index] == true">
-                <option value="">选择角色</option>
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[3]">{{c}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <a href="javascript:;" class="glyphicon glyphicon-check text-success" ng-if="teamEdit[index] == true" ng-click="confirmTeam(index)"></a>
-              <a href="javascript:;" class="glyphicon glyphicon-edit text-primary" ng-if="teamEdit[index] != true" ng-click="editTeam(index)"></a>
-              <a href="javascript:;" class="glyphicon glyphicon-remove text-danger" ng-if="t.del == true" ng-click="delTeam(index)"></a>
-            </td>
-          </tr>
-          <tr ng-if="teamEdit[teams.length - 1] != true">
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle"></td>
-            <td class="middle">
-              <a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addTeam()"></a>
-            </td>
-          </tr>
+        <tr ng-repeat="(index, t) in teams">
+          <td class="middle" ng-class="teamClass(index)">
+            <span ng-if="teamEdit[index] != true">{{t.name}}</span>
+            <input type="text" class="form-control" placeholder="请输入技能名" ng-model="t.name" ng-if="teamEdit[index] == true">
+          </td>
+          <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'da'">舞蹈</td>
+          <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'vo'">声乐</td>
+          <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'pf'">表演</td>
+          <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] == true">
+            <select class="form-control" ng-model="t.ability">
+              <option ng-repeat="a in ability" value="{{a.ability}}">{{a.name}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <span ng-if="teamEdit[index] != true">{{t.value}}%</span>
+            <div class="ub uac" ng-if="teamEdit[index] == true"><input type="number" class="form-control ubf1" placeholder="请输入技能提升百分数" ng-model="t.value">%</div>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <span ng-if="teamEdit[index] != true">{{t.member[0]}}</span>
+            <select class="form-control" ng-model="t.member[0]" ng-if="teamEdit[index] == true">
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[1] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <span ng-if="teamEdit[index] != true">{{t.member[1]}}</span>
+            <select class="form-control" ng-model="t.member[1]" ng-if="teamEdit[index] == true">
+              <option value="">选择角色</option>
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <span ng-if="teamEdit[index] != true">{{t.member[2]}}</span>
+            <select class="form-control" ng-model="t.member[2]" ng-if="teamEdit[index] == true">
+              <option value="">选择角色</option>
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[3] && c != t.member[4]">{{c}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <span ng-if="teamEdit[index] != true">{{t.member[3]}}</span>
+            <select class="form-control" ng-model="t.member[3]" ng-if="teamEdit[index] == true">
+              <option value="">选择角色</option>
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[4]">{{c}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <span ng-if="teamEdit[index] != true">{{t.member[4]}}</span>
+            <select class="form-control" ng-model="t.member[4]" ng-if="teamEdit[index] == true">
+              <option value="">选择角色</option>
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[3]">{{c}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <a href="javascript:;" class="glyphicon glyphicon-check text-success" ng-if="teamEdit[index] == true" ng-click="confirmTeam(index)"></a>
+            <a href="javascript:;" class="glyphicon glyphicon-edit text-primary" ng-if="teamEdit[index] != true" ng-click="editTeam(index)"></a>
+            <a href="javascript:;" class="glyphicon glyphicon-remove text-danger" ng-if="t.del == true" ng-click="delTeam(index)"></a>
+          </td>
+        </tr>
+        <tr ng-if="teamEdit[teams.length - 1] != true">
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle"></td>
+          <td class="middle">
+            <a href="javascript:;" class="glyphicon glyphicon-plus text-success" ng-click="addTeam()"></a>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
@@ -439,87 +439,87 @@
           <col width="20%">
         </colgroup>
         <tbody ng-repeat="(index, t) in teams">
-          <tr>
-            <td colspan="2" class="middle" ng-class="teamClass(index)">
-              <label>技能名</label>
-              <div ng-if="teamEdit[index] != true">{{t.name}}</div>
-              <input type="text" class="form-control input-sm" placeholder="请输入技能名" ng-model="t.name" ng-if="teamEdit[index] == true">
-            </td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'da'">
-              <label>属性</label>
-              <div>舞蹈</div>
-            </td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'vo'">
-              <label>属性</label>
-              <div>声乐</div>
-            </td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'pf'">
-              <label>属性</label>
-              <div>表演</div>
-            </td>
-            <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] == true">
-              <label>属性</label>
-              <select class="form-control" ng-model="t.ability">
-                <option ng-repeat="a in ability" value="{{a.ability}}">{{a.name}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <label>提升</label>
-              <div ng-if="teamEdit[index] != true">{{t.value}}%</div>
-              <div class="ub uac" ng-if="teamEdit[index] == true"><input type="number" class="form-control input-sm ubf1" placeholder="请输入技能提升百分数" ng-model="t.value">%</div>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <label>操作</label>
-              <div ng-if="teamEdit[index] == true"><a href="javascript:;" class="glyphicon glyphicon-check text-success" ng-click="confirmTeam(index)"></a></div>
-              <div ng-if="teamEdit[index] != true"><a href="javascript:;" class="glyphicon glyphicon-edit text-primary" ng-click="editTeam(index)"></a></div>
-              <div ng-if="t.del == true"><a href="javascript:;" class="glyphicon glyphicon-remove text-danger" ng-click="delTeam(index)"></a></div>
-            </td>
-          </tr>
-          <tr>
-            <td class="middle" ng-class="teamClass(index)">
-              <label>角色1</label>
-              <div ng-if="teamEdit[index] != true">{{t.member[0]}}</div>
-              <select class="form-control" ng-model="t.member[0]" ng-if="teamEdit[index] == true">
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[1] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <label>角色2</label>
-              <div ng-if="teamEdit[index] != true">{{t.member[1]}}</div>
-              <div ng-if="teamEdit[index] != true && t.member[1] == null">&nbsp;</div>
-              <select class="form-control" ng-model="t.member[1]" ng-if="teamEdit[index] == true">
-                <option value="">选择角色</option>
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <label>角色3</label>
-              <div ng-if="teamEdit[index] != true">{{t.member[2]}}</div>
-              <div ng-if="teamEdit[index] != true && t.member[2] == null">&nbsp;</div>
-              <select class="form-control" ng-model="t.member[2]" ng-if="teamEdit[index] == true">
-                <option value="">选择角色</option>
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[3] && c != t.member[4]">{{c}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <label>角色4</label>
-              <div ng-if="teamEdit[index] != true">{{t.member[3]}}</div>
-              <div ng-if="teamEdit[index] != true && t.member[3] == null">&nbsp;</div>
-              <select class="form-control" ng-model="t.member[3]" ng-if="teamEdit[index] == true">
-                <option value="">选择角色</option>
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[4]">{{c}}</option>
-              </select>
-            </td>
-            <td class="middle" ng-class="teamClass(index)">
-              <label>角色5</label>
-              <div ng-if="teamEdit[index] != true">{{t.member[4]}}</div>
-              <div ng-if="teamEdit[index] != true && t.member[4] == null">&nbsp;</div>
-              <select class="form-control" ng-model="t.member[4]" ng-if="teamEdit[index] == true">
-                <option value="">选择角色</option>
-                <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[3]">{{c}}</option>
-              </select>
-            </td>
-          </tr>
+        <tr>
+          <td colspan="2" class="middle" ng-class="teamClass(index)">
+            <label>技能名</label>
+            <div ng-if="teamEdit[index] != true">{{t.name}}</div>
+            <input type="text" class="form-control input-sm" placeholder="请输入技能名" ng-model="t.name" ng-if="teamEdit[index] == true">
+          </td>
+          <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'da'">
+            <label>属性</label>
+            <div>舞蹈</div>
+          </td>
+          <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'vo'">
+            <label>属性</label>
+            <div>声乐</div>
+          </td>
+          <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] != true && t.ability == 'pf'">
+            <label>属性</label>
+            <div>表演</div>
+          </td>
+          <td class="middle" ng-class="teamClass(index)" ng-if="teamEdit[index] == true">
+            <label>属性</label>
+            <select class="form-control" ng-model="t.ability">
+              <option ng-repeat="a in ability" value="{{a.ability}}">{{a.name}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <label>提升</label>
+            <div ng-if="teamEdit[index] != true">{{t.value}}%</div>
+            <div class="ub uac" ng-if="teamEdit[index] == true"><input type="number" class="form-control input-sm ubf1" placeholder="请输入技能提升百分数" ng-model="t.value">%</div>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <label>操作</label>
+            <div ng-if="teamEdit[index] == true"><a href="javascript:;" class="glyphicon glyphicon-check text-success" ng-click="confirmTeam(index)"></a></div>
+            <div ng-if="teamEdit[index] != true"><a href="javascript:;" class="glyphicon glyphicon-edit text-primary" ng-click="editTeam(index)"></a></div>
+            <div ng-if="t.del == true"><a href="javascript:;" class="glyphicon glyphicon-remove text-danger" ng-click="delTeam(index)"></a></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="middle" ng-class="teamClass(index)">
+            <label>角色1</label>
+            <div ng-if="teamEdit[index] != true">{{t.member[0]}}</div>
+            <select class="form-control" ng-model="t.member[0]" ng-if="teamEdit[index] == true">
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[1] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <label>角色2</label>
+            <div ng-if="teamEdit[index] != true">{{t.member[1]}}</div>
+            <div ng-if="teamEdit[index] != true && t.member[1] == null">&nbsp;</div>
+            <select class="form-control" ng-model="t.member[1]" ng-if="teamEdit[index] == true">
+              <option value="">选择角色</option>
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[2] && c != t.member[3] && c != t.member[4]">{{c}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <label>角色3</label>
+            <div ng-if="teamEdit[index] != true">{{t.member[2]}}</div>
+            <div ng-if="teamEdit[index] != true && t.member[2] == null">&nbsp;</div>
+            <select class="form-control" ng-model="t.member[2]" ng-if="teamEdit[index] == true">
+              <option value="">选择角色</option>
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[3] && c != t.member[4]">{{c}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <label>角色4</label>
+            <div ng-if="teamEdit[index] != true">{{t.member[3]}}</div>
+            <div ng-if="teamEdit[index] != true && t.member[3] == null">&nbsp;</div>
+            <select class="form-control" ng-model="t.member[3]" ng-if="teamEdit[index] == true">
+              <option value="">选择角色</option>
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[4]">{{c}}</option>
+            </select>
+          </td>
+          <td class="middle" ng-class="teamClass(index)">
+            <label>角色5</label>
+            <div ng-if="teamEdit[index] != true">{{t.member[4]}}</div>
+            <div ng-if="teamEdit[index] != true && t.member[4] == null">&nbsp;</div>
+            <select class="form-control" ng-model="t.member[4]" ng-if="teamEdit[index] == true">
+              <option value="">选择角色</option>
+              <option ng-repeat="c in character" value="{{c}}" ng-if="c != t.member[0] && c != t.member[1] && c != t.member[2] && c != t.member[3]">{{c}}</option>
+            </select>
+          </td>
+        </tr>
         </tbody>
         <tbody>
         <tr ng-if="teamEdit[teams.length - 1] != true">
@@ -573,43 +573,43 @@
     <div class="page-header team-title">舞蹈（<span class="text-danger">红</span>）合计值最大</div>
     <table class="table table-bordered text-center">
       <tbody>
-        <tr>
-          <td class="middle danger">技能</td>
-          <td class="middle danger">
-            <div>合计值</div>
-            <div>{{da_max_team.da}}</div>
-          </td>
-          <td class="middle danger">
-            <div>前两队</div>
-            <div>{{da_max_team.team[0].da + da_max_team.team[1].da}}</div>
-          </td>
-          <td class="middle danger">
-            <div>第一队</div>
-            <div>{{da_max_team.team[0].da}}</div>
-          </td>
-          <td class="middle danger">
-            <div>第二队</div>
-            <div>{{da_max_team.team[1].da}}</div>
-          </td>
-          <td class="middle danger">
-            <div>第三队</div>
-            <div>{{da_max_team.team[2].da}}</div>
-          </td>
-        </tr>
-        <tr ng-repeat="(t_i, team) in da_max_team.team">
-          <td class="middle danger">
-            <div class="ub uov uac">
-              <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
-              <div class="team-value nowrap" ng-if="team.name!='no_team'">{{team.value}}%</div>
-            </div>
-          </td>
-          <td class="middle" ng-repeat="(c_i, card) in team.card" ng-class="cardColor(card)">
-            <div>{{card.star}}★</div>
-            <div ng-if="card.name!=''">【{{card.name}}】</div>
-            <div>{{card.character}}</div>
-            <div ng-class="timesClass(card)">{{timesVal(card, card.da)}}</div>
-          </td>
-        </tr>
+      <tr>
+        <td class="middle danger">技能</td>
+        <td class="middle danger">
+          <div>合计值</div>
+          <div>{{da_max_team.da}}</div>
+        </td>
+        <td class="middle danger">
+          <div>前两队</div>
+          <div>{{da_max_team.team[0].da + da_max_team.team[1].da}}</div>
+        </td>
+        <td class="middle danger">
+          <div>第一队</div>
+          <div>{{da_max_team.team[0].da}}</div>
+        </td>
+        <td class="middle danger">
+          <div>第二队</div>
+          <div>{{da_max_team.team[1].da}}</div>
+        </td>
+        <td class="middle danger">
+          <div>第三队</div>
+          <div>{{da_max_team.team[2].da}}</div>
+        </td>
+      </tr>
+      <tr ng-repeat="(t_i, team) in da_max_team.team">
+        <td class="middle danger">
+          <div class="ub uov uac">
+            <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+            <div class="team-value nowrap" ng-if="team.name!='no_team'">{{team.value}}%</div>
+          </div>
+        </td>
+        <td class="middle" ng-repeat="(c_i, card) in team.card" ng-class="cardColor(card)">
+          <div>{{card.star}}★</div>
+          <div ng-if="card.name!=''">【{{card.name}}】</div>
+          <div>{{card.character}}</div>
+          <div ng-class="timesClass(card)">{{timesVal(card, card.da)}}</div>
+        </td>
+      </tr>
       </tbody>
     </table>
     <div class="page-header team-title">舞蹈（<span class="text-danger">红</span>）前两队最大</div>
@@ -956,7 +956,7 @@
     </div>
   </form>
 </div>
-<script src="dev.js"></script>
+<script src="app.js?1809101000"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
