@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-cn">
 <head>
   <meta charset="utf-8">
@@ -822,6 +822,50 @@
       </tr>
       </tbody>
     </table>
+    <div class="page-header team-title">总合计值最大</div>
+    <table class="table table-bordered text-center">
+      <tbody>
+      <tr>
+        <td class="middle warning">技能</td>
+        <td class="middle info">
+          <div>合计值</div>
+          <div>{{all_max_team.all}}</div>
+        </td>
+        <td class="middle info">
+          <div>前两队</div>
+          <div>{{all_max_team.team[0].all + all_max_team.team[1].all}}</div>
+        </td>
+        <td class="middle warning">
+          <div>第一队</div>
+          <div>{{all_max_team.team[0].all}}</div>
+        </td>
+        <td class="middle warning">
+          <div>第二队</div>
+          <div>{{all_max_team.team[1].all}}</div>
+        </td>
+        <td class="middle warning">
+          <div>第三队</div>
+          <div>{{all_max_team.team[2].all}}</div>
+        </td>
+      </tr>
+      <tr ng-repeat="(t_i, team) in all_max_team.team">
+        <td class="middle warning">
+          <div class="ub uov uac">
+            <div class="team-name" ng-if="team.name!='no_team'">{{team.name}}</div>
+            <div class="team-value nowrap" ng-if="team.name!='no_team'">{{team.value}}%</div>
+          </div>
+        </td>
+        <td class="middle" ng-repeat="(c_i, card) in team.card" ng-class="cardColor(card)">
+          <div>{{card.star}}★</div>
+          <div ng-if="card.name!=''">【{{card.name}}】</div>
+          <div>{{card.character}}</div>
+          <div ng-class="timesClass(card)"><span class="text-danger">舞蹈 {{timesVal(card, card.da)}}</span></div>
+          <div ng-class="timesClass(card)"><span class="text-primary">声乐 {{timesVal(card, card.vo)}}</span></div>
+          <div ng-class="timesClass(card)"><span class="text-warning">表演 {{timesVal(card, card.pf)}}</span></div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="temporary-team">
@@ -959,8 +1003,8 @@
 <script src="dev.js?1809101000"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-87943396-1', 'auto');
   ga('send', 'pageview');
